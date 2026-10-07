@@ -1,0 +1,4744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Cravings — Fresh, delicious and carefully prepared products made for every craving.">
+
+    <title>Cravings | Fresh & Delicious</title>
+
+
+    <!-- =========================
+         GOOGLE FONTS
+    ========================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- MAIN CSS -->
+
+    <link rel="stylesheet"
+          href="style.css">
+
+
+    <style>
+
+        /* =========================================================
+           CRAVINGS — PREMIUM NATURAL HOME
+           Generic Products Website
+           Logo: logo.png
+        ========================================================= */
+
+
+        :root {
+
+            --cr-cream: #f6ead5;
+            --cr-cream2: #efe0c4;
+
+            --cr-almond: #d4ad78;
+
+            --cr-brown: #70452d;
+            --cr-dark: #3f281d;
+
+            --cr-gold: #c88f32;
+            --cr-gold-light: #e7c98b;
+
+            --cr-green: #7c8657;
+
+            --cr-white: #fffaf1;
+
+            --cr-text: #4f392b;
+            --cr-muted: #7b634e;
+
+        }
+
+
+        /* =========================================================
+           BASIC
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            background: var(--cr-cream);
+
+            color: var(--cr-dark);
+
+            font-family: "DM Sans", sans-serif;
+
+            overflow-x: hidden;
+
+        }
+
+
+        a {
+
+            -webkit-tap-highlight-color: transparent;
+
+        }
+
+
+        button {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =========================================================
+           LOGO INTRO POPUP
+        ========================================================= */
+
+        .logo-intro {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 99999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+
+                radial-gradient(
+                    circle at center,
+                    rgba(246,234,213,0.98),
+                    rgba(239,224,196,0.98)
+                );
+
+            animation: introFade 4s ease forwards;
+
+            pointer-events: none;
+
+        }
+
+
+        .logo-intro-inner {
+
+            text-align: center;
+
+            animation: logoPop 1.6s cubic-bezier(.2,.8,.2,1);
+
+        }
+
+
+        .logo-intro img {
+
+            width: min(390px, 72vw);
+
+            max-height: 280px;
+
+            object-fit: contain;
+
+            filter:
+
+                drop-shadow(
+                    0 20px 30px
+                    rgba(63,40,29,.18)
+                );
+
+            mix-blend-mode: multiply;
+
+        }
+
+
+        .logo-intro-text {
+
+            margin-top: 14px;
+
+            color: var(--cr-brown);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            opacity: .8;
+
+        }
+
+
+        @keyframes logoPop {
+
+            0% {
+
+                opacity: 0;
+
+                transform:
+                    scale(.55)
+                    translateY(30px);
+
+            }
+
+            60% {
+
+                opacity: 1;
+
+                transform:
+                    scale(1.05)
+                    translateY(0);
+
+            }
+
+            100% {
+
+                transform:
+                    scale(1);
+
+            }
+
+        }
+
+
+        @keyframes introFade {
+
+            0% {
+
+                opacity: 1;
+
+                visibility: visible;
+
+            }
+
+            70% {
+
+                opacity: 1;
+
+            }
+
+            100% {
+
+                opacity: 0;
+
+                visibility: hidden;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           BACKGROUND LOGO WATERMARK
+        ========================================================= */
+
+        .background-logo {
+
+            position: fixed;
+
+            z-index: -1;
+
+            width: 650px;
+
+            height: 650px;
+
+            left: 50%;
+
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%)
+                rotate(-7deg);
+
+            opacity: .035;
+
+            pointer-events: none;
+
+            user-select: none;
+
+        }
+
+
+        .background-logo img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            mix-blend-mode: multiply;
+
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .main-navbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5000;
+
+            background:
+                rgba(246,234,213,.94);
+
+            border-bottom:
+                1px solid
+                rgba(112,69,45,.14);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 8px 30px
+                rgba(63,40,29,.08);
+
+        }
+
+
+        .nav-container {
+
+            max-width: 1240px;
+
+            margin: auto;
+
+            min-height: 78px;
+
+            padding: 0 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 22px;
+
+        }
+
+
+        /* =========================================================
+           BRAND
+        ========================================================= */
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            text-decoration: none;
+
+            color: var(--cr-dark);
+
+        }
+
+
+        .brand-logo {
+
+            width: 54px;
+
+            height: 54px;
+
+            object-fit: contain;
+
+            mix-blend-mode: multiply;
+
+            filter:
+                drop-shadow(
+                    0 7px 10px
+                    rgba(63,40,29,.10)
+                );
+
+        }
+
+
+        .brand-text strong {
+
+            display: block;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 25px;
+
+            letter-spacing: .4px;
+
+            line-height: 1;
+
+        }
+
+
+        .brand-text span {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: var(--cr-gold);
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        /* =========================================================
+           NAV LINKS
+        ========================================================= */
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 27px;
+
+        }
+
+
+        .nav-links a {
+
+            color: #6a4b38;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: .25s;
+
+        }
+
+
+        .nav-links a:hover,
+
+        .nav-links a.active {
+
+            color: var(--cr-gold);
+
+        }
+
+
+        /* =========================================================
+           NAV ACTIONS
+        ========================================================= */
+
+        .nav-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+        }
+
+
+        .nav-icon {
+
+            position: relative;
+
+            width: 40px;
+
+            height: 40px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(112,69,45,.16);
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,250,241,.72);
+
+            color: var(--cr-dark);
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            transition: .25s;
+
+        }
+
+
+        .nav-icon:hover {
+
+            transform: translateY(-2px);
+
+            border-color:
+                var(--cr-gold);
+
+            box-shadow:
+                0 8px 18px
+                rgba(63,40,29,.10);
+
+        }
+
+
+        .cart-count {
+
+            position: absolute;
+
+            top: -5px;
+
+            right: -5px;
+
+            min-width: 18px;
+
+            height: 18px;
+
+            padding: 0 5px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 20px;
+
+            background: var(--cr-gold);
+
+            color: white;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        .nav-order-btn {
+
+            text-decoration: none;
+
+            color: var(--cr-white);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cr-brown),
+                    var(--cr-dark)
+                );
+
+            padding: 12px 18px;
+
+            border-radius: 13px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 22px
+                rgba(63,40,29,.18);
+
+            transition: .25s;
+
+        }
+
+
+        .nav-order-btn:hover {
+
+            transform: translateY(-2px);
+
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero-section {
+
+            position: relative;
+
+            overflow: hidden;
+
+            min-height: 680px;
+
+            background:
+
+                radial-gradient(
+                    circle at 80% 25%,
+                    rgba(212,173,120,.34),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 15% 90%,
+                    rgba(200,143,50,.12),
+                    transparent 28%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #f8edd9 0%,
+                    #f1dfbd 55%,
+                    #dfc49c 100%
+                );
+
+        }
+
+
+        .hero-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+
+            height: 500px;
+
+            right: -160px;
+
+            top: -180px;
+
+            border:
+                1px solid
+                rgba(112,69,45,.15);
+
+            border-radius: 50%;
+
+        }
+
+
+        .hero-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+
+            height: 350px;
+
+            left: -180px;
+
+            bottom: -190px;
+
+            border:
+                1px solid
+                rgba(200,143,50,.18);
+
+            border-radius: 50%;
+
+        }
+
+
+        .hero-container {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 1240px;
+
+            min-height: 680px;
+
+            margin: auto;
+
+            padding:
+                80px 28px
+                70px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.08fr .92fr;
+
+            align-items: center;
+
+            gap: 45px;
+
+        }
+
+
+        .hero-small-title {
+
+            color: var(--cr-gold);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 4px;
+
+        }
+
+
+        .hero-content h1 {
+
+            margin:
+                14px 0 15px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(58px, 7vw, 94px);
+
+            line-height: .91;
+
+            letter-spacing: -4px;
+
+            color: var(--cr-dark);
+
+        }
+
+
+        .hero-content h1 span {
+
+            color: var(--cr-brown);
+
+        }
+
+
+        .hero-content h2 {
+
+            margin-bottom: 18px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 27px;
+
+            color: var(--cr-brown);
+
+        }
+
+
+        .hero-content > p {
+
+            max-width: 590px;
+
+            color: var(--cr-muted);
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+        }
+
+
+        .hero-buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin: 28px 0;
+
+        }
+
+
+        .btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            min-height: 48px;
+
+            padding: 0 22px;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            transition: .25s;
+
+        }
+
+
+        .btn:hover {
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .btn-primary {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cr-brown),
+                    var(--cr-dark)
+                );
+
+            color: var(--cr-white);
+
+            box-shadow:
+                0 12px 28px
+                rgba(63,40,29,.20);
+
+        }
+
+
+        .btn-secondary {
+
+            background:
+                rgba(255,250,241,.68);
+
+            color: var(--cr-brown);
+
+            border:
+                1px solid
+                rgba(112,69,45,.18);
+
+        }
+
+
+        /* =========================================================
+           HERO POINTS
+        ========================================================= */
+
+        .hero-points {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 11px;
+
+        }
+
+
+        .hero-point {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 10px 13px;
+
+            background:
+                rgba(255,250,241,.56);
+
+            border:
+                1px solid
+                rgba(112,69,45,.12);
+
+            border-radius: 15px;
+
+        }
+
+
+        .hero-point-icon {
+
+            width: 37px;
+
+            height: 37px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 12px;
+
+            background: #e5d0ab;
+
+        }
+
+
+        .hero-point strong,
+
+        .hero-point span {
+
+            display: block;
+
+        }
+
+
+        .hero-point strong {
+
+            font-size: 11px;
+
+        }
+
+
+        .hero-point span {
+
+            margin-top: 2px;
+
+            color: #806955;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =========================================================
+           HERO LOGO DISPLAY
+        ========================================================= */
+
+        .hero-visual {
+
+            position: relative;
+
+            min-height: 500px;
+
+            display: grid;
+
+            place-items: center;
+
+        }
+
+
+        .hero-glow {
+
+            position: absolute;
+
+            width: 450px;
+
+            height: 450px;
+
+            border-radius: 50%;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(255,250,241,.95),
+                    rgba(212,173,120,.25) 55%,
+                    transparent 72%
+                );
+
+        }
+
+
+        .hero-logo-card {
+
+            position: relative;
+
+            z-index: 3;
+
+            width: 390px;
+
+            height: 390px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,250,241,.70);
+
+            border:
+                1px solid
+                rgba(112,69,45,.14);
+
+            box-shadow:
+
+                0 35px 65px
+                rgba(63,40,29,.18),
+
+                inset 0 0 40px
+                rgba(255,255,255,.55);
+
+            animation:
+                heroFloat 5s ease-in-out infinite;
+
+        }
+
+
+        .hero-logo-card img {
+
+            width: 88%;
+
+            height: 88%;
+
+            object-fit: contain;
+
+            mix-blend-mode: multiply;
+
+            filter:
+                drop-shadow(
+                    0 20px 25px
+                    rgba(63,40,29,.12)
+                );
+
+        }
+
+
+        @keyframes heroFloat {
+
+            0%,100% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-10px)
+                    rotate(1deg);
+
+            }
+
+        }
+
+
+        .floating-badge {
+
+            position: absolute;
+
+            z-index: 5;
+
+            padding: 14px 18px;
+
+            background:
+                rgba(255,250,241,.92);
+
+            border:
+                1px solid
+                rgba(112,69,45,.13);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 18px 35px
+                rgba(63,40,29,.14);
+
+        }
+
+
+        .floating-badge strong {
+
+            display: block;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 24px;
+
+            color: var(--cr-brown);
+
+        }
+
+
+        .floating-badge span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--cr-muted);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        .badge-one {
+
+            left: 0;
+
+            top: 80px;
+
+        }
+
+
+        .badge-two {
+
+            right: 0;
+
+            bottom: 75px;
+
+        }
+
+
+        /* =========================================================
+           BENEFITS
+        ========================================================= */
+
+        .benefits-strip {
+
+            background: var(--cr-dark);
+
+            color: #fff7e8;
+
+        }
+
+
+        .benefits-grid {
+
+            max-width: 1240px;
+
+            margin: auto;
+
+            padding: 18px 28px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 10px;
+
+        }
+
+
+        .benefit-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 13px;
+
+            border-right:
+                1px solid
+                rgba(255,250,241,.10);
+
+        }
+
+
+        .benefit-item:last-child {
+
+            border-right: 0;
+
+        }
+
+
+        .benefit-icon {
+
+            width: 39px;
+
+            height: 39px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(246,234,213,.10);
+
+        }
+
+
+        .benefit-item strong,
+
+        .benefit-item span {
+
+            display: block;
+
+        }
+
+
+        .benefit-item strong {
+
+            font-size: 12px;
+
+        }
+
+
+        .benefit-item span {
+
+            margin-top: 3px;
+
+            color: #cbb9a4;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =========================================================
+           COMMON SECTION
+        ========================================================= */
+
+        .section {
+
+            padding: 95px 0;
+
+        }
+
+
+        .container {
+
+            max-width: 1240px;
+
+            margin: auto;
+
+            padding: 0 28px;
+
+        }
+
+
+        .section-heading {
+
+            max-width: 700px;
+
+            margin:
+                0 auto
+                45px;
+
+            text-align: center;
+
+        }
+
+
+        .section-heading > span,
+
+        .section-label {
+
+            color: var(--cr-gold);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        .section-heading h2 {
+
+            margin:
+                10px 0
+                12px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(35px,4vw,53px);
+
+            line-height: 1.05;
+
+            color: var(--cr-dark);
+
+        }
+
+
+        .section-heading p {
+
+            color: var(--cr-muted);
+
+            line-height: 1.75;
+
+        }
+
+
+        /* =========================================================
+           PRODUCTS
+        ========================================================= */
+
+        .products-section {
+
+            background: var(--cr-white);
+
+            position: relative;
+
+        }
+
+
+        .products-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 240px;
+
+            height: 240px;
+
+            left: -100px;
+
+            top: 100px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(212,173,120,.12);
+
+        }
+
+
+        .products-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,minmax(0,1fr));
+
+            gap: 22px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .products-loading {
+
+            grid-column: 1/-1;
+
+            padding: 65px 20px;
+
+            text-align: center;
+
+            color: var(--cr-muted);
+
+        }
+
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        .about-section {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #efe0c4,
+                    #f8eedc
+                );
+
+        }
+
+
+        .about-container {
+
+            display: grid;
+
+            grid-template-columns:
+                .9fr 1.1fr;
+
+            align-items: center;
+
+            gap: 75px;
+
+        }
+
+
+        .about-visual {
+
+            min-height: 400px;
+
+            position: relative;
+
+            display: grid;
+
+            place-items: center;
+
+        }
+
+
+        .about-logo-card {
+
+            width: 370px;
+
+            height: 370px;
+
+            padding: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 42px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--cr-brown),
+                    var(--cr-dark)
+                );
+
+            box-shadow:
+                0 30px 55px
+                rgba(63,40,29,.22);
+
+            transform: rotate(-3deg);
+
+        }
+
+
+        .about-logo-card img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            mix-blend-mode: screen;
+
+            filter:
+                brightness(1.05)
+                drop-shadow(
+                    0 15px 20px
+                    rgba(0,0,0,.18)
+                );
+
+        }
+
+
+        .about-floating-card {
+
+            position: absolute;
+
+            right: 2%;
+
+            bottom: 25px;
+
+            padding: 17px 21px;
+
+            border-radius: 18px;
+
+            background: var(--cr-white);
+
+            box-shadow:
+                0 18px 35px
+                rgba(63,40,29,.13);
+
+        }
+
+
+        .about-floating-card strong {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 30px;
+
+            color: var(--cr-brown);
+
+        }
+
+
+        .about-floating-card span {
+
+            display: block;
+
+            color: var(--cr-muted);
+
+            font-size: 11px;
+
+        }
+
+
+        .about-content h2 {
+
+            margin:
+                10px 0
+                18px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(36px,4vw,55px);
+
+            line-height: 1.08;
+
+        }
+
+
+        .about-content h2 span {
+
+            color: var(--cr-brown);
+
+        }
+
+
+        .about-content p {
+
+            color: #735b48;
+
+            line-height: 1.8;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .about-points {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 13px;
+
+            margin: 25px 0;
+
+        }
+
+
+        .about-points div {
+
+            display: flex;
+
+            gap: 9px;
+
+            align-items: center;
+
+            color: #5f4635;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .about-points span {
+
+            color: var(--cr-green);
+
+            font-size: 18px;
+
+        }
+
+
+        /* =========================================================
+           WHY US
+        ========================================================= */
+
+        .why-section {
+
+            background: var(--cr-cream);
+
+        }
+
+
+        .why-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .why-card {
+
+            padding: 28px 22px;
+
+            border-radius: 24px;
+
+            background:
+                rgba(255,250,241,.78);
+
+            border:
+                1px solid
+                rgba(112,69,45,.10);
+
+            box-shadow:
+                0 14px 30px
+                rgba(63,40,29,.06);
+
+            transition: .3s;
+
+        }
+
+
+        .why-card:hover {
+
+            transform:
+                translateY(-7px);
+
+            box-shadow:
+                0 22px 40px
+                rgba(63,40,29,.11);
+
+        }
+
+
+        .why-icon {
+
+            width: 53px;
+
+            height: 53px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 16px;
+
+            background: #e5d0ab;
+
+            font-size: 23px;
+
+        }
+
+
+        .why-card h3 {
+
+            margin:
+                18px 0
+                8px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 22px;
+
+        }
+
+
+        .why-card p {
+
+            color: var(--cr-muted);
+
+            line-height: 1.65;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================================================
+           ORDER BANNER
+        ========================================================= */
+
+        .order-banner {
+
+            padding: 58px 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cr-brown),
+                    var(--cr-dark)
+                );
+
+            color: var(--cr-white);
+
+        }
+
+
+        .order-banner-inner {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+        }
+
+
+        .order-banner span {
+
+            color: var(--cr-gold-light);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        .order-banner h2 {
+
+            max-width: 750px;
+
+            margin-top: 8px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(30px,4vw,46px);
+
+            line-height: 1.1;
+
+        }
+
+
+        .btn-light {
+
+            background: var(--cr-cream);
+
+            color: var(--cr-dark);
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =========================================================
+           CONTACT
+        ========================================================= */
+
+        .contact-section {
+
+            background: var(--cr-white);
+
+        }
+
+
+        .contact-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 16px;
+
+        }
+
+
+        .contact-card {
+
+            text-align: center;
+
+            padding: 30px 16px;
+
+            border-radius: 22px;
+
+            border:
+                1px solid
+                rgba(112,69,45,.10);
+
+            background: #f9efde;
+
+            transition: .25s;
+
+        }
+
+
+        .contact-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 18px 30px
+                rgba(63,40,29,.08);
+
+        }
+
+
+        .contact-icon {
+
+            font-size: 25px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .contact-card h3 {
+
+            margin-bottom: 7px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 21px;
+
+        }
+
+
+        .contact-card p {
+
+            color: #765b47;
+
+            font-size: 12px;
+
+        }
+/* =========================================================
+   CUSTOMER FEEDBACK
+========================================================= */
+
+.customer-feedback-section {
+    margin-top: 60px;
+    padding: 45px;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #fffaf1, #f3e2c2);
+    border: 1px solid rgba(112,69,45,.12);
+    box-shadow: 0 20px 45px rgba(63,40,29,.08);
+}
+
+.feedback-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.feedback-header span,
+.reviews-title span,
+.social-label {
+    color: var(--cr-gold);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.feedback-header h3 {
+    margin: 8px 0;
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    color: var(--cr-dark);
+}
+
+.feedback-header p {
+    margin: 0;
+    color: #7b634e;
+    font-size: 13px;
+}
+
+.feedback-form {
+    max-width: 650px;
+    margin: auto;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(112,69,45,.16);
+    background: #fffaf1;
+    color: var(--cr-dark);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+    border-color: var(--cr-gold);
+    box-shadow: 0 0 0 3px rgba(200,143,50,.10);
+}
+
+.feedback-form textarea {
+    resize: vertical;
+    margin-top: 15px;
+}
+
+.rating-area {
+    text-align: center;
+    margin: 22px 0 5px;
+}
+
+.rating-area p {
+    margin: 0 0 8px;
+    color: #6f513d;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.star-rating button {
+    border: 0;
+    background: transparent;
+    color: #d5c5ad;
+    font-size: 34px;
+    cursor: pointer;
+    padding: 2px;
+    transition: .2s;
+}
+
+.star-rating button:hover {
+    transform: scale(1.12);
+}
+
+.star-rating button.active {
+    color: #c88f32;
+}
+
+.feedback-submit-btn {
+    width: 100%;
+    margin-top: 18px;
+    border: 0;
+    border-radius: 14px;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--cr-brown), var(--cr-dark));
+    color: #fffaf1;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 12px 25px rgba(63,40,29,.16);
+}
+
+.feedback-submit-btn:hover {
+    transform: translateY(-1px);
+}
+
+.feedback-submit-btn:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
+.feedback-form-message {
+    display: none;
+    text-align: center;
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: var(--cr-brown);
+}
+
+
+/* =========================================================
+   CUSTOMER REVIEWS
+========================================================= */
+
+.reviews-area {
+    margin-top: 48px;
+}
+
+.reviews-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.reviews-title h3 {
+    margin: 7px 0 0;
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    color: var(--cr-dark);
+}
+
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.review-card {
+    padding: 22px;
+    border-radius: 20px;
+    background: #fffaf1;
+    border: 1px solid rgba(112,69,45,.10);
+    box-shadow: 0 12px 25px rgba(63,40,29,.06);
+}
+
+.review-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.review-name {
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--cr-dark);
+}
+
+.review-stars {
+    color: #c88f32;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.review-message {
+    margin: 14px 0 0;
+    color: #765b47;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.reviews-loading,
+.no-reviews {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 25px;
+    color: #806955;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   INSTAGRAM + QR
+========================================================= */
+
+.social-contact-box {
+    margin-top: 35px;
+    padding: 35px;
+    border-radius: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    background: linear-gradient(135deg, #70452d, #3f281d);
+    color: #fffaf1;
+    box-shadow: 0 20px 45px rgba(63,40,29,.15);
+}
+
+.social-content {
+    max-width: 650px;
+}
+
+.social-content h3 {
+    margin: 9px 0 10px;
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+}
+
+.social-content p {
+    margin: 0 0 20px;
+    color: #dbc9b3;
+    line-height: 1.7;
+    font-size: 13px;
+}
+
+.instagram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 18px;
+    border-radius: 13px;
+    background: #f6ead5;
+    color: #3f281d;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    transition: .2s;
+}
+
+.instagram-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.18);
+}
+
+.instagram-qr-box {
+    min-width: 190px;
+    padding: 18px;
+    border-radius: 20px;
+    background: #fffaf1;
+    color: var(--cr-dark);
+    text-align: center;
+}
+
+.instagram-qr {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 12px;
+    display: grid;
+    place-items: center;
+}
+
+.instagram-qr img {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+}
+
+.instagram-qr-box strong {
+    display: block;
+    font-size: 11px;
+}
+
+.instagram-qr-box span {
+    display: block;
+    margin-top: 4px;
+    color: #806955;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:650px) {
+
+    .customer-feedback-section {
+        padding: 28px 18px;
+    }
+
+    .feedback-header h3 {
+        font-size: 26px;
+    }
+
+    .reviews-container {
+        grid-template-columns: 1fr;
+    }
+
+    .social-contact-box {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 28px 20px;
+    }
+
+    .social-content h3 {
+        font-size: 26px;
+    }
+
+    .instagram-qr-box {
+        width: 180px;
+        min-width: auto;
+    }
+}
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer {
+
+            background: #2e1d15;
+
+            color: #eadbc8;
+
+            padding-top: 60px;
+
+        }
+
+
+        .footer-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr 1fr;
+
+            gap: 40px;
+
+            padding-bottom: 45px;
+
+        }
+
+
+        .footer-logo {
+
+            color: #fffaf1;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .footer .brand-logo {
+
+            filter:
+                brightness(1.15)
+                drop-shadow(
+                    0 7px 10px
+                    rgba(0,0,0,.20)
+                );
+
+        }
+
+
+        .footer-brand > p {
+
+            max-width: 310px;
+
+            color: #bda995;
+
+            line-height: 1.7;
+
+            font-size: 12px;
+
+        }
+
+
+        .footer-column {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+        }
+
+
+        .footer-column h4 {
+
+            margin-bottom: 8px;
+
+            color: #f1d39a;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .footer-column a,
+
+        .footer-column span {
+
+            color: #cbb8a3;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            transition: .2s;
+
+        }
+
+
+        .footer-column a:hover {
+
+            color: #f1d39a;
+
+        }
+
+
+        .footer-bottom {
+
+            border-top:
+                1px solid
+                rgba(255,250,241,.08);
+
+            padding:
+                18px 28px;
+
+            text-align: center;
+
+            color: #a9907a;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media(max-width:1050px) {
+
+            .nav-links {
+
+                display: none;
+
+            }
+
+
+            .hero-container {
+
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+            }
+
+
+            .hero-content > p {
+
+                margin: auto;
+
+            }
+
+
+            .hero-buttons,
+
+            .hero-points {
+
+                justify-content: center;
+
+            }
+
+
+            .hero-visual {
+
+                min-height: 480px;
+
+            }
+
+
+            .benefits-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .about-container {
+
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+
+            }
+
+
+            .about-content {
+
+                text-align: center;
+
+            }
+
+
+            .about-points {
+
+                max-width: 600px;
+
+                margin:
+                    25px auto;
+
+            }
+
+
+            .about-content .btn {
+
+                margin: auto;
+
+            }
+
+
+            .why-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .contact-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width:650px) {
+
+            .background-logo {
+
+                width: 430px;
+
+                height: 430px;
+
+            }
+
+
+            .logo-intro img {
+
+                width: 300px;
+
+            }
+
+
+            .nav-container {
+
+                padding:
+                    0 16px;
+
+                min-height: 70px;
+
+            }
+
+
+            .brand-logo {
+
+                width: 46px;
+
+                height: 46px;
+
+            }
+
+
+            .brand-text strong {
+
+                font-size: 22px;
+
+            }
+
+
+            .brand-text span {
+
+                font-size: 7px;
+
+                letter-spacing: 2px;
+
+            }
+
+
+            .nav-actions {
+
+                gap: 5px;
+
+            }
+
+
+            .nav-order-btn {
+
+                display: none;
+
+            }
+
+
+            .nav-icon {
+
+                width: 37px;
+
+                height: 37px;
+
+            }
+
+
+            .hero-container {
+
+                padding:
+                    60px 18px 45px;
+
+                min-height: auto;
+
+            }
+
+
+            .hero-content h1 {
+
+                font-size: 58px;
+
+                letter-spacing: -2px;
+
+            }
+
+
+            .hero-content h2 {
+
+                font-size: 22px;
+
+            }
+
+
+            .hero-points {
+
+                display: grid;
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .hero-point {
+
+                justify-content: flex-start;
+
+            }
+
+
+            .hero-visual {
+
+                min-height: 400px;
+
+            }
+
+
+            .hero-logo-card {
+
+                width: 290px;
+
+                height: 290px;
+
+            }
+
+
+            .badge-one {
+
+                left: 0;
+
+                top: 55px;
+
+            }
+
+
+            .badge-two {
+
+                right: 0;
+
+                bottom: 45px;
+
+            }
+
+
+            .benefits-grid,
+
+            .why-grid,
+
+            .contact-grid,
+
+            .footer-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .benefit-item {
+
+                border-right: 0;
+
+                border-bottom:
+                    1px solid
+                    rgba(255,250,241,.10);
+
+            }
+
+
+            .benefit-item:last-child {
+
+                border-bottom: 0;
+
+            }
+
+
+            .section {
+
+                padding: 70px 0;
+
+            }
+
+
+            .container {
+
+                padding:
+                    0 18px;
+
+            }
+
+
+            .products-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .about-points {
+
+                grid-template-columns: 1fr;
+
+                text-align: left;
+
+            }
+
+
+            .about-logo-card {
+
+                width: 290px;
+
+                height: 290px;
+
+                padding: 30px;
+
+            }
+
+
+            .about-floating-card {
+
+                right: 0;
+
+            }
+
+
+            .order-banner-inner {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            .footer-grid {
+
+                gap: 28px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         BACKGROUND LOGO
+    ========================================================== -->
+
+    <div class="background-logo">
+
+        <img src="cravings.jpeg"
+             alt="Cravings Logo">
+
+    </div>
+
+
+
+  
+<div class="logo-intro" id="logoIntro">
+    <div class="logo-intro-inner">
+
+        <h1>Cravings</h1>
+
+        <div class="intro-line"></div>
+
+        <p>FRESH • RICH • DELICIOUS</p>
+
+    </div>
+</div>
+    <!-- =========================================================
+         NAVBAR
+    ========================================================== -->
+
+    <header class="main-navbar">
+
+        <div class="nav-container">
+
+
+            <!-- BRAND -->
+
+            <a href="home.html"
+               class="brand"
+               aria-label="Cravings Home">
+
+                <img src="logo.jpeg"
+                     alt="Cravings"
+                     class="brand-logo">
+
+                <div class="brand-text">
+
+                    <strong>Cravings</strong>
+
+                    <span>
+                    
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- NAV LINKS -->
+
+            <nav class="nav-links">
+
+                <a href="home.html"
+                   class="active">
+                    Home
+                </a>
+
+                <a href="#products">
+                    Products
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#why-us">
+                    Why Us
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </nav>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="nav-actions">
+
+              <button
+    class="logout-btn"
+    id="logoutBtn"
+    type="button"
+>
+    Logout
+</button>
+
+
+                <a href="cart.html"
+                   class="nav-icon cart-icon"
+                   aria-label="Cart">
+
+                    🛒
+
+                    <span
+                        id="cartCount"
+                        class="cart-count">
+
+                        0
+
+                    </span>
+
+                </a>
+
+
+                <a href="profile.html"
+                   class="nav-icon"
+                   aria-label="Profile">
+
+                    👤
+
+                </a>
+
+
+                <a href="#products"
+                   class="nav-order-btn">
+
+                    Order Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+
+    <section class="hero-section">
+
+        <div class="hero-container">
+
+
+            <!-- LEFT -->
+
+            <div class="hero-content">
+
+                <span class="hero-small-title">
+
+                    WELCOME TO CRAVINGS
+
+                </span>
+
+
+                <h1>
+
+                    Fresh.<br>
+
+                    Rich.<br>
+
+                    <span>Delicious.</span>
+
+                </h1>
+
+
+                <h2>
+
+                    Something Delicious For Every Craving.
+
+                </h2>
+
+
+                <p>
+
+                    Discover freshly prepared favourites made
+                    with quality ingredients, rich flavours and
+                    plenty of care. From refreshing drinks to
+                    delicious treats, there is something for
+                    every mood and every craving.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a href="#products"
+                       class="btn btn-primary">
+
+                        Explore Products
+
+                        <span>→</span>
+
+                    </a>
+
+
+                    <a href="#about"
+                       class="btn btn-secondary">
+
+                        Our Story
+
+                    </a>
+
+                </div>
+
+
+                <!-- HERO POINTS -->
+
+                <div class="hero-points">
+
+
+                    <div class="hero-point">
+
+                        <div class="hero-point-icon">
+                            ✨
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Quality Products
+                            </strong>
+
+                            <span>
+                                Carefully selected
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-point">
+
+                        <div class="hero-point-icon">
+                            🥛
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Fresh & Delicious
+                            </strong>
+
+                            <span>
+                                Made with care
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-point">
+
+                        <div class="hero-point-icon">
+                            ❤️
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Made For You
+                            </strong>
+
+                            <span>
+                                Every craving matters
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <div class="hero-visual">
+
+                <div class="hero-glow"></div>
+
+
+                <div class="hero-logo-card">
+
+                    <img src="pfp.jpeg"
+                         alt="Cravings Logo">
+
+                </div>
+
+
+                <div class="floating-badge badge-one">
+
+                    <strong>
+                        Fresh
+                    </strong>
+
+                    <span>
+                        Every Day
+                    </span>
+
+                </div>
+
+
+                <div class="floating-badge badge-two">
+
+                    <strong>
+                        Premium
+                    </strong>
+
+                    <span>
+                        Taste & Quality
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         BENEFITS
+    ========================================================== -->
+
+    <section class="benefits-strip">
+
+        <div class="container benefits-grid">
+
+
+            <div class="benefit-item">
+
+                <div class="benefit-icon">
+                    ✨
+                </div>
+
+                <div>
+
+                    <strong>
+                        Quality Ingredients
+                    </strong>
+
+                    <span>
+                        Carefully selected
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="benefit-item">
+
+                <div class="benefit-icon">
+                    😋
+                </div>
+
+                <div>
+
+                    <strong>
+                        Great Taste
+                    </strong>
+
+                    <span>
+                        Made to satisfy
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="benefit-item">
+
+                <div class="benefit-icon">
+                    🌿
+                </div>
+
+                <div>
+
+                    <strong>
+                        Fresh Preparation
+                    </strong>
+
+                    <span>
+                        Prepared with care
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="benefit-item">
+
+                <div class="benefit-icon">
+                    📦
+                </div>
+
+                <div>
+
+                    <strong>
+                        Carefully Packed
+                    </strong>
+
+                    <span>
+                        Ready for you
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         PRODUCTS
+         Products are loaded from Firebase
+    ========================================================== -->
+
+    <section id="products"
+             class="section products-section">
+
+        <div class="container">
+
+
+            <div class="section-heading">
+
+                <span>
+                    OUR PRODUCTS
+                </span>
+
+
+                <h2>
+                    Find Your Favourites...
+                </h2>
+
+
+                <p>
+
+                    Explore our collection of freshly prepared
+                    products and choose whatever your craving
+                    is asking for today.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- IMPORTANT:
+                 products.js renders Firebase products here -->
+
+            <div id="productsGrid"
+                 class="products-grid">
+
+
+                <div class="products-loading">
+
+                    <div class="loading-spinner"></div>
+
+                    <p>
+                        Loading our delicious products...
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         ABOUT
+    ========================================================== -->
+
+    <section id="about"
+             class="section about-section">
+
+        <div class="container about-container">
+
+
+            <!-- IMAGE / LOGO -->
+
+            <div class="about-visual">
+
+                <div class="about-logo-card">
+
+                    <img src="cravings.jpeg"
+                         alt="Cravings">
+
+                </div>
+
+
+                <div class="about-floating-card">
+
+                    <strong>
+                        100%
+                    </strong>
+
+                    <span>
+                        Made With Care
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTENT -->
+
+            <div class="about-content">
+
+                <span class="section-label">
+
+                    ABOUT CRAVINGS
+
+                </span>
+
+
+                <h2>
+
+                    Good Food.<br>
+
+                    <span>
+                        Great Moments.
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Cravings is all about bringing delicious
+                    products and happy moments together.
+
+                </p>
+
+
+                <p>
+
+                    We focus on quality ingredients, careful
+                    preparation, attractive presentation and
+                    an easy ordering experience — so you can
+                    simply choose your favourite and enjoy it.
+
+                </p>
+
+
+                <div class="about-points">
+
+
+                    <div>
+
+                        <span>✓</span>
+
+                        Quality ingredients
+
+                    </div>
+
+
+                    <div>
+
+                        <span>✓</span>
+
+                        Delicious taste
+
+                    </div>
+
+
+                    <div>
+
+                        <span>✓</span>
+
+                        Fresh preparation
+
+                    </div>
+
+
+                    <div>
+
+                        <span>✓</span>
+
+                        Hygienically packed
+
+                    </div>
+
+
+                </div>
+
+
+                <a href="#products"
+                   class="btn btn-primary">
+
+                    Explore Products →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         WHY US
+    ========================================================== -->
+
+    <section id="why-us"
+             class="section why-section">
+
+        <div class="container">
+
+
+            <div class="section-heading">
+
+                <span>
+                    WHY CRAVINGS
+                </span>
+
+
+                <h2>
+                    A Little More Goodness
+                    In Your Day...
+                </h2>
+
+
+                <p>
+
+                    We keep things simple — quality,
+                    freshness, taste and an experience
+                    worth coming back for.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="why-grid">
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Quality First
+                    </h3>
+
+                    <p>
+
+                        We care about the ingredients,
+                        preparation and presentation
+                        of every product.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        😋
+                    </div>
+
+                    <h3>
+                        Delicious Taste
+                    </h3>
+
+                    <p>
+
+                        Products are made to give you
+                        a satisfying flavour in every
+                        bite or sip.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        🌿
+                    </div>
+
+                    <h3>
+                        Fresh & Careful
+                    </h3>
+
+                    <p>
+
+                        Fresh preparation and thoughtful
+                        handling are part of the Cravings
+                        experience.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        🚚
+                    </div>
+
+                    <h3>
+                        Easy Ordering
+                    </h3>
+
+                    <p>
+
+                        Select your favourite products,
+                        add them to cart and place your
+                        order with ease.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         ORDER BANNER
+    ========================================================== -->
+
+    <section class="order-banner">
+
+        <div class="container order-banner-inner">
+
+
+            <div>
+
+                <span>
+                    YOUR CRAVING IS WAITING
+                </span>
+
+
+                <h2>
+
+                    One choice.
+                    One smile.
+                    One more craving.
+
+                </h2>
+
+            </div>
+
+
+            <a href="#products"
+               class="btn btn-light">
+
+                Explore Products →
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         CONTACT
+    ========================================================== -->
+<section id="contact"
+         class="section contact-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>
+                GET IN TOUCH
+            </span>
+
+            <h2>
+                We'd Love To Hear From You
+            </h2>
+
+            <p>
+                Questions, feedback or a special order?
+                Reach out to us.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             CONTACT DETAILS
+        ========================== -->
+
+        <div class="contact-grid">
+
+
+            <div class="contact-card">
+
+                <div class="contact-icon">
+                    📞
+                </div>
+
+                <h3>
+                    Call Us
+                </h3>
+
+                <p>
+                    +91 9573280512<br>
+                    +91 9346728173
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div class="contact-icon">
+                    ✉️
+                </div>
+
+                <h3>
+                    Email
+                </h3>
+
+                <p>
+                    drinkscravings@gmail.com
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div class="contact-icon">
+                    📍
+                </div>
+
+                <h3>
+                    Location
+                </h3>
+
+                <p>
+                    ADONI
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div class="contact-icon">
+                    💬
+                </div>
+
+                <h3>
+                    WhatsApp
+                </h3>
+
+                <p>
+                    Chat With Us
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             CUSTOMER FEEDBACK
+        ========================== -->
+
+        <div class="customer-feedback-section">
+
+            <div class="feedback-header">
+
+                <span>
+                    CUSTOMER LOVE
+                </span>
+
+                <h3>
+                    How Was Your Experience?
+                </h3>
+
+                <p>
+                    Share your experience with Cravings.
+                </p>
+
+            </div>
+
+
+            <form
+                id="feedbackForm"
+                class="feedback-form"
+            >
+
+                <input
+                    type="text"
+                    id="feedbackName"
+                    placeholder="Your Name"
+                    maxlength="40"
+                    required
+                >
+
+
+                <div class="rating-area">
+
+                    <p>
+                        Give Us A Rating
+                    </p>
+
+                    <div
+                        class="star-rating"
+                        id="starRating"
+                    >
+
+                        <button
+                            type="button"
+                            data-rating="1"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            type="button"
+                            data-rating="2"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            type="button"
+                            data-rating="3"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            type="button"
+                            data-rating="4"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            type="button"
+                            data-rating="5"
+                        >
+                            ★
+                        </button>
+
+                    </div>
+
+                    <input
+                        type="hidden"
+                        id="selectedRating"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <textarea
+                    id="feedbackMessage"
+                    rows="4"
+                    maxlength="300"
+                    placeholder="Write your feedback..."
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    id="feedbackSubmitBtn"
+                    class="feedback-submit-btn"
+                >
+                    ⭐ Submit Feedback
+                </button>
+
+
+                <p
+                    id="feedbackFormMessage"
+                    class="feedback-form-message"
+                ></p>
+
+            </form>
+
+
+            <!-- CUSTOMER REVIEWS -->
+
+            <div class="reviews-area">
+
+                <div class="reviews-title">
+
+                    <span>
+                        WHAT OUR CUSTOMERS SAY
+                    </span>
+
+                    <h3>
+                        Customer Reviews
+                    </h3>
+
+                </div>
+
+
+                <div
+                    id="reviewsContainer"
+                    class="reviews-container"
+                >
+
+                    <div class="reviews-loading">
+                        Loading customer reviews...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             INSTAGRAM
+        ========================== -->
+
+        <div class="social-contact-box">
+
+            <div class="social-content">
+
+                <span class="social-label">
+                    FOLLOW CRAVINGS
+                </span>
+
+                <h3>
+                    Stay Connected With Us
+                </h3>
+
+                <p>
+                    Follow Cravings on Instagram for
+                    new products, updates and offers.
+                </p>
+
+
+                <!-- CHANGE THIS LINK -->
+                <a
+                    href="https://www.instagram.com/cravings.drinks?stkn=b2h0N2t3ZXptNHhn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="instagram-btn"
+                >
+
+                    📸
+
+                    Follow Us On Instagram
+
+                    ↗
+
+                </a>
+
+            </div>
+
+
+            <!-- INSTAGRAM QR -->
+
+            <div class="instagram-qr-box">
+
+                <div
+                    id="instagramQRCode"
+                    class="instagram-qr"
+                ></div>
+
+                <strong>
+                    Scan To Visit Instagram
+                </strong>
+
+                <span>
+                    Scan with your phone camera
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+
+            <!-- BRAND -->
+
+            <div class="footer-brand">
+
+                <a href="home.html"
+                   class="brand footer-logo">
+
+                    <img src="logo.jpeg"
+                         alt="Cravings"
+                         class="brand-logo">
+
+                    <div class="brand-text">
+
+                        <strong>
+                            Cravings
+                        </strong>
+
+                        <span>
+                            TASTE • SIP • REPEAT
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <p>
+
+                    Freshly prepared.
+                    Deliciously enjoyed.
+                    Made for every craving.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- QUICK LINKS -->
+
+            <div class="footer-column">
+
+                <h4>
+                    Quick Links
+                </h4>
+
+                <a href="home.html">
+                    Home
+                </a>
+
+                <a href="#products">
+                    Products
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#why-us">
+                    Why Us
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </div>
+
+
+
+            <!-- CUSTOMER -->
+
+            <div class="footer-column">
+
+                <h4>
+                    Customer
+                </h4>
+
+                <a href="profile.html">
+                    My Profile
+                </a>
+
+                <a href="cart.html">
+                    My Cart
+                </a>
+
+                <a href="checkout.html">
+                    Checkout
+                </a>
+
+                <a href="index.html">
+                    Logout
+                </a>
+
+            </div>
+
+
+
+            <!-- CONTACT -->
+
+            <div class="footer-column">
+
+                <h4>
+                    Contact
+                </h4>
+
+                <span>
+                    📞 +91 9573280512
+                    📞 +91 9346728173
+                </span>
+
+                <span>
+                    ✉️ drinkscravings@gmail.com
+                </span>
+
+                <span>
+                    📍 ADONI
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>
+
+                ©
+                <span id="currentYear"></span>
+                Cravings.
+                All Rights Reserved.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+        <!-- =========================================================
+         FIREBASE PRODUCTS
+    ========================================================== -->
+
+   <script
+    type="module"
+    src="js/products.js?v=2">
+</script>
+
+    <!-- =========================================================
+         CART
+    ========================================================== -->
+
+    <script
+        type="module"
+        src="js/cart.js">
+    </script>
+
+
+<!-- =========================================================
+     AUTH PROTECTION + LOGOUT
+========================================================= -->
+
+<script type="module">
+
+    import {
+        onAuthStateChanged,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+    import {
+        auth
+    } from "./js/firebase-config.js";
+
+
+    /* =====================================================
+       AUTH CHECK
+    ===================================================== */
+
+    onAuthStateChanged(auth, (user) => {
+
+        if (!user) {
+
+            window.location.replace(
+                "index.html"
+            );
+
+            return;
+        }
+
+        showCravingsWelcomePopup();
+
+    });
+
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    const logoutBtn =
+        document.getElementById(
+            "logoutBtn"
+        );
+
+
+    if (logoutBtn) {
+
+        logoutBtn.addEventListener(
+            "click",
+            async () => {
+
+                try {
+
+                    logoutBtn.disabled = true;
+
+                    logoutBtn.textContent =
+                        "Logging out...";
+
+
+                    await signOut(auth);
+
+
+                    window.location.replace(
+                        "index.html"
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Logout error:",
+                        error
+                    );
+
+
+                    logoutBtn.disabled = false;
+
+                    logoutBtn.textContent =
+                        "Logout";
+
+                }
+
+            }
+        );
+
+    }
+
+</script>
+    <!-- =========================================================
+         CURRENT YEAR
+    ========================================================== -->
+
+    <script>
+
+        const yearElement =
+            document.getElementById(
+                "currentYear"
+            );
+
+
+        if (yearElement) {
+
+            yearElement.textContent =
+                new Date().getFullYear();
+
+        }
+
+    </script>
+
+
+    <!-- =========================================================
+         QR CODE LIBRARY
+    ========================================================== -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
+
+
+    <!-- =========================================================
+         CUSTOMER FEEDBACK + STAR RATING
+         + CUSTOMER REVIEWS
+         + INSTAGRAM QR
+    ========================================================== -->
+
+    <script type="module">
+
+        import {
+            collection,
+            addDoc,
+            getDocs,
+            query,
+            limit,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+        import {
+            auth,
+            db
+        } from "./js/firebase-config.js";
+
+
+        /* =====================================================
+           INSTAGRAM
+        ===================================================== */
+
+        const instagramURL =
+            "https://www.instagram.com/cravings.drinks?stkn=b2h0N2t3ZXptNHhn";
+
+
+        /* =====================================================
+           INSTAGRAM QR CODE
+        ===================================================== */
+
+        const instagramQRCode =
+            document.getElementById(
+                "instagramQRCode"
+            );
+
+
+        if (
+            instagramQRCode &&
+            typeof QRCode !== "undefined"
+        ) {
+
+            new QRCode(
+                instagramQRCode,
+                {
+                    text: instagramURL,
+
+                    width: 150,
+
+                    height: 150,
+
+                    colorDark: "#3f281d",
+
+                    colorLight: "#fffaf1",
+
+                    correctLevel:
+                        QRCode.CorrectLevel.H
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           STAR RATING
+        ===================================================== */
+
+        const starButtons =
+            document.querySelectorAll(
+                "#starRating button"
+            );
+
+
+        const selectedRating =
+            document.getElementById(
+                "selectedRating"
+            );
+
+
+        starButtons.forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const rating =
+                            Number(
+                                button.dataset.rating
+                            );
+
+
+                        if (selectedRating) {
+
+                            selectedRating.value =
+                                rating;
+
+                        }
+
+
+                        starButtons.forEach(
+                            star => {
+
+                                const
+                                starRating =
+                                    Number(
+                                        star.dataset.rating
+                                    );
+
+
+                                star.classList.toggle(
+                                    "active",
+                                    starRating <= rating
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           FEEDBACK MESSAGE
+        ===================================================== */
+
+        function showFeedbackMessage(
+            message,
+            success = true
+        ) {
+
+            const messageBox =
+                document.getElementById(
+                    "feedbackFormMessage"
+                );
+
+
+            if (!messageBox) return;
+
+
+            messageBox.textContent =
+                message;
+
+
+            messageBox.style.display =
+                "block";
+
+
+            messageBox.style.color =
+                success
+                    ? "#6f7b42"
+                    : "#a33d32";
+
+        }
+   
+
+        /* =====================================================
+           SECURITY — ESCAPE REVIEW TEXT
+        ===================================================== */
+
+        function escapeReviewText(value) {
+
+            return String(value)
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =====================================================
+           LOAD CUSTOMER REVIEWS
+        ===================================================== */
+
+        async function loadReviews() {
+
+            const container =
+                document.getElementById(
+                    "reviewsContainer"
+                );
+
+
+            if (!container) return;
+
+
+            try {
+
+                const reviewsQuery =
+                    query(
+                        collection(
+                            db,
+                            "feedback"
+                        ),
+
+                        limit(20)
+                    );
+
+
+                const snapshot =
+                    await getDocs(
+                        reviewsQuery
+                    );
+
+
+                if (snapshot.empty) {
+
+                    container.innerHTML = `
+
+                        <div class="no-reviews">
+
+                            Be the first to share your
+                            Cravings experience ⭐
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                const reviews = [];
+
+
+                snapshot.forEach(
+                    doc => {
+
+                        reviews.push({
+
+                            id: doc.id,
+
+                            ...doc.data()
+
+                        });
+
+                    }
+                );
+
+
+                reviews.reverse();
+
+
+                container.innerHTML =
+                    reviews
+                        .map(
+                            review => {
+
+                                const rating =
+                                    Math.min(
+                                        5,
+
+                                        Math.max(
+                                            1,
+
+                                            Number(
+                                                review.rating
+                                            ) || 5
+                                        )
+                                    );
+
+
+                                const stars =
+                                    "★".repeat(
+                                        rating
+                                    ) +
+
+                                    "☆".repeat(
+                                        5 - rating
+                                    );
+
+
+                                return `
+
+                                    <div class="review-card">
+
+                                        <div class="review-top">
+
+                                            <span class="review-name">
+
+                                                ${escapeReviewText(
+                                                    review.name ||
+                                                    "Customer"
+                                                )}
+
+                                            </span>
+
+
+                                            <span class="review-stars">
+
+                                                ${stars}
+
+                                            </span>
+
+                                        </div>
+
+
+                                        <p class="review-message">
+
+                                            ${escapeReviewText(
+                                                review.message ||
+                                                ""
+                                            )}
+
+                                        </p>
+
+                                    </div>
+
+                                `;
+
+                            }
+                        )
+                        .join("");
+
+
+            } catch (error) {
+
+                console.error(
+                    "Reviews loading error:",
+                    error
+                );
+
+
+                container.innerHTML = `
+
+                    <div class="no-reviews">
+
+                        Customer reviews will appear here.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           FEEDBACK FORM
+        ===================================================== */
+
+        const feedbackForm =
+            document.getElementById(
+                "feedbackForm"
+            );
+
+
+        if (feedbackForm) {
+
+            feedbackForm.addEventListener(
+                "submit",
+                async event => {
+
+                    event.preventDefault();
+
+
+                    const user =
+                        auth.currentUser;
+
+
+                    const name =
+                        document
+                            .getElementById(
+                                "feedbackName"
+                            )
+                            ?.value
+                            .trim();
+
+
+                    const message =
+                        document
+                            .getElementById(
+                                "feedbackMessage"
+                            )
+                            ?.value
+                            .trim();
+
+
+                    const rating =
+                        Number(
+                            selectedRating?.value ||
+                            0
+                        );
+
+
+                    /* -----------------------------
+                       VALIDATION
+                    ----------------------------- */
+
+                    if (!name) {
+
+                        showFeedbackMessage(
+                            "Please enter your name.",
+                            false
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (rating < 1) {
+
+                        showFeedbackMessage(
+                            "Please select a star rating.",
+                            false
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!message) {
+
+                        showFeedbackMessage(
+                            "Please write your feedback.",
+                            false
+                        );
+
+                        return;
+
+                    }
+
+
+                    const submitButton =
+                        document.getElementById(
+                            "feedbackSubmitBtn"
+                        );
+
+
+                    try {
+
+                        if (submitButton) {
+
+                            submitButton.disabled =
+                                true;
+
+                            submitButton.textContent =
+                                "Submitting...";
+
+                        }
+
+
+                        /* -----------------------------
+                           SAVE FEEDBACK
+                        ----------------------------- */
+
+                        await addDoc(
+                            collection(
+                                db,
+                                "feedback"
+                            ),
+
+                            {
+
+                                name: name,
+
+                                message: message,
+
+                                rating: rating,
+
+                                userId:
+                                    user?.uid || "",
+
+                                createdAt:
+                                    serverTimestamp()
+
+                            }
+                        );
+
+
+                        /* -----------------------------
+                           RESET FORM
+                        ----------------------------- */
+
+                        feedbackForm.reset();
+
+
+                        if (selectedRating) {
+
+                            selectedRating.value =
+                                "0";
+
+                        }
+
+
+                        starButtons.forEach(
+                            star => {
+
+                                star.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        /* -----------------------------
+                           SUCCESS MESSAGE
+                        ----------------------------- */
+
+                        showFeedbackMessage(
+                            "Thank you! Your feedback has been submitted ⭐",
+                            true
+                        );
+
+
+                        /* -----------------------------
+                           REFRESH REVIEWS
+                        ----------------------------- */
+
+                        await loadReviews();
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Feedback submit error:",
+                            error
+                        );
+
+
+                        showFeedbackMessage(
+                            "Unable to submit feedback. Please try again.",
+                            false
+                        );
+
+
+                    } finally {
+
+                        if (submitButton) {
+
+                            submitButton.disabled =
+                                false;
+
+                            submitButton.textContent =
+                                "⭐ Submit Feedback";
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           START REVIEWS
+        ===================================================== */
+
+        loadReviews();
+
+    </script>
+
+<!-- Cravings Welcome Popup -->
+<div id="cravingsWelcomePopup" class="cravings-popup">
+    <div class="cravings-popup-box">
+        <div class="cravings-popup-logo">🥛</div>
+        <h2>Cravings</h2>
+        <p>Welcome to Cravings!</p>
+    </div>
+</div>
+
+<style>
+    .cravings-popup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+    }
+
+    .cravings-popup-box {
+        width: min(360px, 90%);
+        padding: 35px 25px;
+        text-align: center;
+        border-radius: 22px;
+        background: #fff8ed;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        animation: cravingsPopupIn 0.45s ease;
+    }
+
+    .cravings-popup-logo {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+
+    .cravings-popup-box h2 {
+        margin: 0;
+        font-size: 32px;
+        color: #3b2619;
+        font-family: Georgia, serif;
+    }
+
+    .cravings-popup-box p {
+        margin: 8px 0 0;
+        color: #76543d;
+        font-size: 16px;
+    }
+
+    @keyframes cravingsPopupIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .cravings-popup.hide {
+        animation: cravingsPopupOut 0.35s ease forwards;
+    }
+
+    @keyframes cravingsPopupOut {
+        to {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+    }
+</style>
+
+</body>
+
+</html>

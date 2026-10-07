@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Badam Milk</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           Cravings — CUSTOMER PROFILE
+        ===================================================== */
+
+        .profile-page {
+            min-height: 100vh;
+            padding: 120px 6% 80px;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(200, 143, 50, 0.13),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(120, 132, 87, 0.10),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f6ead5 0%,
+                    #efe0c4 48%,
+                    #e5cfaa 100%
+                );
+        }
+
+        .profile-header {
+            max-width: 1180px;
+            margin: 0 auto 35px;
+        }
+
+        .profile-header span {
+            color: #a96f1e;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .profile-header h1 {
+            margin: 10px 0 7px;
+
+            color: #3f281d;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(38px, 5vw, 56px);
+        }
+
+        .profile-header p {
+            margin: 0;
+            color: #6f5a49;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           PROFILE LAYOUT
+        ===================================================== */
+
+        .profile-layout {
+            max-width: 1180px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1fr);
+
+            gap: 25px;
+            align-items: start;
+        }
+
+        .profile-sidebar,
+        .profile-main-card {
+            background: rgba(255, 250, 241, 0.93);
+
+            border: 1px solid rgba(139, 99, 69, 0.20);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 20px 55px rgba(63, 40, 29, 0.10);
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .profile-sidebar {
+            overflow: hidden;
+            position: sticky;
+            top: 100px;
+        }
+
+        .profile-user-box {
+            padding: 28px 22px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #f3e2c2,
+                    #e5cfaa
+                );
+
+            border-bottom:
+                1px solid rgba(139, 99, 69, 0.15);
+        }
+
+        .profile-avatar {
+            width: 78px;
+            height: 78px;
+
+            margin: 0 auto 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #70452d,
+                    #4a3021
+                );
+
+            color: #fffaf1;
+
+            font-size: 28px;
+            font-weight: 900;
+
+            box-shadow:
+                0 10px 25px rgba(74, 48, 33, 0.20);
+        }
+
+        .profile-user-box h2 {
+            margin: 0 0 5px;
+
+            color: #3f281d;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+        }
+
+        .profile-user-box p {
+            margin: 0;
+
+            color: #806956;
+            font-size: 12px;
+
+            word-break: break-word;
+        }
+
+        .profile-nav {
+            padding: 12px;
+        }
+
+        .profile-nav button {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            padding: 13px 14px;
+            margin-bottom: 5px;
+
+            border: 0;
+            border-radius: 12px;
+
+            background: transparent;
+
+            color: #6f5a49;
+
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 800;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .profile-nav button:hover {
+            background: #f3e2c2;
+            color: #4a3021;
+        }
+
+        .profile-nav button.active {
+            background:
+                linear-gradient(
+                    135deg,
+                    #70452d,
+                    #5a3927
+                );
+
+            color: #fffaf1;
+
+            box-shadow:
+                0 7px 17px rgba(74, 48, 33, 0.16);
+        }
+
+        .profile-nav .logout-btn {
+            margin-top: 12px;
+
+            color: #9b4c3d;
+
+            border-top:
+                1px solid rgba(139, 99, 69, 0.14);
+
+            border-radius: 0;
+            padding-top: 17px;
+        }
+
+        .profile-nav .logout-btn:hover {
+            background: #f7e7df;
+            color: #8d3c2d;
+        }
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .profile-main-card {
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .profile-panel {
+            padding: 30px;
+        }
+
+        .profile-panel h2 {
+            margin: 0;
+
+            color: #3f281d;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 27px;
+        }
+
+        .panel-subtitle {
+            margin: 7px 0 25px;
+
+            color: #806956;
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           ACCOUNT INFORMATION
+        ===================================================== */
+
+        .account-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 15px;
+        }
+
+        .account-box {
+            padding: 20px;
+
+            border: 1px solid #d9c4a3;
+            border-radius: 16px;
+
+            background: #fffaf1;
+        }
+
+        .account-box span {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #a96f1e;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .account-box strong {
+            display: block;
+
+            color: #4a3021;
+            font-size: 15px;
+
+            word-break: break-word;
+        }
+
+        .account-status {
+            display: inline-flex;
+
+            align-items: center;
+            gap: 6px;
+
+            margin-top: 6px;
+
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            background: #eef1e4;
+            color: #59643d;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        /* =====================================================
+           ORDERS
+        ===================================================== */
+
+        .orders-toolbar {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+        .refresh-orders-btn {
+            border: 1px solid #d4bd9b;
+
+            background: #f3e2c2;
+            color: #70452d;
+
+            padding: 9px 14px;
+
+            border-radius: 999px;
+
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .refresh-orders-btn:hover {
+            background: #e5cfaa;
+        }
+
+        #ordersLoading {
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: #806956;
+            font-size: 13px;
+        }
+
+        #noOrders {
+            padding: 55px 20px;
+
+            text-align: center;
+
+            border: 1px dashed #cdb48e;
+            border-radius: 18px;
+
+            background: #fffaf1;
+        }
+
+        #noOrders .empty-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        #noOrders h3 {
+            margin: 0 0 7px;
+
+            color: #4a3021;
+
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        #noOrders p {
+            margin: 0 0 18px;
+
+            color: #806956;
+            font-size: 13px;
+        }
+
+        #noOrders a {
+            display: inline-flex;
+
+            padding: 11px 20px;
+
+            border-radius: 999px;
+
+            background: #70452d;
+            color: #fffaf1;
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        /* =====================================================
+           ORDER CARD
+        ===================================================== */
+
+        #ordersContainer {
+            display: grid;
+            gap: 15px;
+        }
+
+        .customer-order-card {
+            padding: 20px;
+
+            border: 1px solid #d9c4a3;
+            border-radius: 18px;
+
+            background: #fffaf1;
+
+            transition: 0.2s ease;
+        }
+
+        .customer-order-card:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(74, 48, 33, 0.08);
+        }
+
+        .order-top {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 15px;
+
+            padding-bottom: 15px;
+
+            border-bottom:
+                1px solid rgba(139, 99, 69, 0.13);
+        }
+
+        .order-number {
+            color: #4a3021;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .order-date {
+            margin-top: 5px;
+
+            color: #8b735f;
+            font-size: 11px;
+        }
+
+        .order-status {
+            display: inline-flex;
+
+            padding: 6px 10px;
+
+            border-radius: 999px;
+
+            background: #f3e2c2;
+            color: #70452d;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+        .order-status.delivered {
+            background: #e5ead7;
+            color: #59643d;
+        }
+
+        .order-status.cancelled {
+            background: #f5e0db;
+            color: #8d3c2d;
+        }
+
+        .order-middle {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr 1fr;
+
+            gap: 15px;
+
+            padding: 17px 0;
+        }
+
+        .order-info span {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #9a806a;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .order-info strong {
+            color: #4a3021;
+            font-size: 13px;
+        }
+
+        .payment-paid {
+            color: #59643d !important;
+        }
+
+        .payment-pending {
+            color: #a96f1e !important;
+        }
+
+        .order-bottom {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .order-total-label {
+            color: #806956;
+            font-size: 11px;
+        }
+
+        .order-total-value {
+            margin-left: 6px;
+
+            color: #a96f1e;
+            font-size: 19px;
+            font-weight: 900;
+        }
+
+        .view-order-btn {
+            border: 1px solid #cdb48e;
+
+            background: #f3e2c2;
+            color: #70452d;
+
+            padding: 9px 14px;
+
+            border-radius: 999px;
+
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .view-order-btn:hover {
+            background: #e5cfaa;
+        }
+
+        /* =====================================================
+           QR STATUS
+        ===================================================== */
+
+        .qr-status-box {
+            margin-top: 15px;
+
+            padding: 12px 14px;
+
+            border-radius: 13px;
+
+            background: #f3e2c2;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .qr-status-box span {
+            color: #806956;
+            font-size: 11px;
+        }
+
+        .qr-active {
+            color: #59643d !important;
+            font-weight: 900;
+        }
+
+        .qr-disabled {
+            color: #8d3c2d !important;
+            font-weight: 900;
+        }
+
+        /* =====================================================
+           ORDER MODAL
+        ===================================================== */
+
+        #profileOrderModal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(63, 40, 29, 0.65);
+
+            backdrop-filter: blur(7px);
+        }
+
+        .profile-order-modal-box {
+            width: min(650px, 100%);
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #fffaf1;
+
+            border: 1px solid #d9c4a3;
+            border-radius: 23px;
+
+            box-shadow:
+                0 30px 80px rgba(40, 24, 16, 0.30);
+        }
+
+        .profile-order-modal-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 22px 25px;
+
+            border-bottom:
+                1px solid #dfcdb2;
+        }
+
+        .profile-order-modal-header h2 {
+            margin: 0;
+
+            color: #3f281d;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+        }
+
+        #closeProfileOrderModal,
+        #closeProfileOrderModalBtn {
+            border: 0;
+
+            background: #f3e2c2;
+            color: #70452d;
+
+            cursor: pointer;
+        }
+
+        #closeProfileOrderModal {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            font-size: 18px;
+        }
+
+        .profile-order-modal-body {
+            padding: 25px;
+        }
+
+        #profileOrderDetails {
+            color: #4a3021;
+        }
+
+        .modal-order-section {
+            margin-bottom: 20px;
+
+            padding-bottom: 18px;
+
+            border-bottom:
+                1px solid #eadbc6;
+        }
+
+        .modal-order-section:last-child {
+            border-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .modal-order-section h4 {
+            margin: 0 0 12px;
+
+            color: #a96f1e;
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .modal-detail-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 9px;
+
+            font-size: 13px;
+        }
+
+        .modal-detail-row span:first-child {
+            color: #806956;
+        }
+
+        .modal-detail-row strong {
+            color: #4a3021;
+            text-align: right;
+        }
+
+        .modal-order-item {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 9px;
+
+            font-size: 12px;
+        }
+
+        .modal-order-item span {
+            color: #6f5a49;
+        }
+
+        .modal-order-item strong {
+            color: #4a3021;
+        }
+
+        .modal-qr-box {
+            padding: 17px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            background: #f3e2c2;
+        }
+
+        .modal-qr-box .qr-symbol {
+            font-size: 38px;
+            margin-bottom: 7px;
+        }
+
+        .modal-qr-box strong {
+            display: block;
+
+            color: #4a3021;
+            font-size: 13px;
+        }
+
+        .modal-qr-box span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #806956;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        #profileMessage {
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 12px 15px;
+
+            border-radius: 11px;
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                position: static;
+            }
+
+            .profile-user-box {
+                padding: 22px;
+            }
+
+            .profile-nav {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 5px;
+            }
+
+            .profile-nav button {
+                margin: 0;
+            }
+
+            .profile-nav .logout-btn {
+                margin-top: 5px;
+                border-top: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-page {
+                padding: 105px 5% 60px;
+            }
+
+            .profile-main-card,
+            .profile-sidebar {
+                border-radius: 18px;
+            }
+
+            .profile-panel {
+                padding: 20px;
+            }
+
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order-middle {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .order-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .profile-nav {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-order-modal-box {
+                border-radius: 18px;
+            }
+
+            .profile-order-modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <a href="index.html" class="brand">
+
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#products">
+                    Products
+                </a>
+
+                <a href="index.html#about">
+                    About
+                </a>
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+            </div>
+
+            <div class="nav-actions">
+
+                <a href="cart.html"
+                   class="cart-link">
+
+                    🛒
+
+                    <span id="cartCount">
+                        0
+                    </span>
+
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         PROFILE PAGE
+    ===================================================== -->
+
+    <main class="profile-page">
+
+        <section class="profile-header">
+
+            <span>
+                MY ACCOUNT
+            </span>
+
+            <h1>Welcome Back</h1>
+
+            <p>
+                Manage your account, track your orders and
+                view your delivery information.
+            </p>
+
+        </section>
+
+
+        <div class="profile-layout">
+
+
+            <!-- =================================================
+                 SIDEBAR
+            ================================================= -->
+
+            <aside class="profile-sidebar">
+
+                <div class="profile-user-box">
+
+                    <div id="profileAvatar"
+                         class="profile-avatar">
+                        U
+                    </div>
+
+                    <h2 id="profileName">
+                        Customer
+                    </h2>
+
+                    <p id="profileEmail">
+                        Loading...
+                    </p>
+
+                </div>
+
+
+                <nav class="profile-nav">
+
+                    <button
+                        type="button"
+                        id="profileTabBtn"
+                        class="active">
+
+                        👤
+                        <span>My Profile</span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="ordersTabBtn">
+
+                        📦
+                        <span>My Orders</span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="window.location.href='cart.html'">
+
+                        🛒
+                        <span>My Cart</span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="window.location.href='index.html'">
+
+                        🏠
+                        <span>Home</span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="logout-btn"
+                        onclick="window.logoutUser()">
+
+                        ↪
+                        <span>Logout</span>
+
+                    </button>
+
+                </nav>
+
+            </aside>
+
+
+            <!-- =================================================
+                 MAIN
+            ================================================= -->
+
+            <section class="profile-main-card">
+
+
+                <!-- PROFILE PANEL -->
+
+                <div id="profilePanel"
+                     class="profile-panel">
+
+                    <h2>
+                        My Profile
+                    </h2>
+
+                    <p class="panel-subtitle">
+                        Your account information
+                    </p>
+
+
+                    <div id="profileMessage"></div>
+
+
+                    <div class="account-grid">
+
+                        <div class="account-box">
+
+                            <span>
+                                Full Name
+                            </span>
+
+                            <strong id="accountName">
+                                Loading...
+                            </strong>
+
+                        </div>
+
+
+                        <div class="account-box">
+
+                            <span>
+                                Email Address
+                            </span>
+
+                            <strong id="accountEmail">
+                                Loading...
+                            </strong>
+
+                        </div>
+
+
+                        <div class="account-box">
+
+                            <span>
+                                Account Status
+                            </span>
+
+                            <strong>
+                                Active Customer
+                            </strong>
+
+                            <div class="account-status"
+                                 id="accountStatus">
+
+                                ● Verified Account
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="account-box">
+
+                            <span>
+                                Ordering
+                            </span>
+
+                            <strong>
+                                Online Ordering Enabled
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ORDERS PANEL
+                ================================================= -->
+
+                <div id="ordersPanel"
+                     class="profile-panel"
+                     style="display:none;">
+
+                    <div class="orders-toolbar">
+
+                        <div>
+
+                            <h2>
+                                My Orders
+                            </h2>
+
+                            <p class="panel-subtitle"
+                               style="margin-bottom:0;">
+
+                                Track your Cravings orders
+                                and delivery status.
+
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="refreshOrdersBtn"
+                            class="refresh-orders-btn">
+
+                            ↻ Refresh
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- LOADING -->
+
+                    <div id="ordersLoading">
+
+                        Loading your orders...
+
+                    </div>
+
+
+                    <!-- NO ORDERS -->
+
+                    <div id="noOrders"
+                         style="display:none;">
+
+                        <div class="empty-icon">
+                            🥛
+                        </div>
+
+                        <h3>
+                            No orders yet
+                        </h3>
+
+                        <p>
+                            Your delicious Cravings journey
+                            starts with your first order.
+                        </p>
+
+                        <a href="index.html#products">
+                            Start Shopping
+                        </a>
+
+                    </div>
+
+
+                    <!-- ORDERS -->
+
+                    <div id="ordersContainer">
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         ORDER DETAILS MODAL
+    ===================================================== -->
+
+    <div id="profileOrderModal">
+
+        <div class="profile-order-modal-box">
+
+            <div class="profile-order-modal-header">
+
+                <h2>
+                    Order Details
+                </h2>
+
+                <button
+                    type="button"
+                    id="closeProfileOrderModal"
+                    aria-label="Close">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div class="profile-order-modal-body">
+
+                <div id="profileOrderDetails">
+                    Loading...
+                </div>
+
+            </div>
+
+
+            <div style="
+                padding:0 25px 25px;
+                display:flex;
+                justify-content:flex-end;
+            ">
+
+                <button
+                    type="button"
+                    id="closeProfileOrderModalBtn"
+                    style="
+                        padding:10px 17px;
+                        border-radius:999px;
+                        font-family:inherit;
+                        font-size:12px;
+                        font-weight:900;
+                        cursor:pointer;
+                    ">
+
+                    Close
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script type="module"
+            src="js/profile.js"></script>
+
+
+    <script>
+
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+
+        
+        document.addEventListener("DOMContentLoaded", () => {
+
+            try {
+
+                const cart =
+                    JSON.parse(
+                        localStorage.getItem("CravingsCart")
+                    ) || [];
+
+                const count =
+                    cart.reduce(
+                        (total, item) =>
+                            total + Number(item.quantity || 0),
+                        0
+                    );
+
+                const cartCount =
+                    document.getElementById("cartCount");
+
+                if (cartCount) {
+                    cartCount.textContent = count;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Cart count error:",
+                    error
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

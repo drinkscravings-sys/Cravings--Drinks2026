@@ -1,0 +1,2967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Cravings</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- QR SCANNER LIBRARY -->
+    <script src="https://unpkg.com/html5-qrcode"
+            type="text/javascript"></script>
+
+
+    <style>
+
+        /* =====================================================
+           Cravings  — ADMIN DASHBOARD
+        ===================================================== */
+
+        .admin-page {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(200,143,50,0.12),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f6ead5 0%,
+                    #efe0c4 48%,
+                    #e5cfaa 100%
+                );
+
+        }
+
+
+        /* =====================================================
+           ADMIN LOGIN
+        ===================================================== */
+
+        #adminAuthScreen {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 99999;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4a3021,
+                    #70452d
+                );
+
+        }
+
+
+        .admin-login-card {
+
+            width: min(430px, 100%);
+
+            padding: 38px 32px;
+
+            border-radius: 25px;
+
+            background: #fffaf1;
+
+            border: 1px solid #d9c4a3;
+
+            box-shadow:
+                0 30px 80px rgba(30,20,10,0.35);
+
+            text-align: center;
+
+        }
+
+
+        .admin-login-icon {
+
+            width: 72px;
+            height: 72px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #c88f32,
+                    #a96f1e
+                );
+
+            color: #fffaf1;
+
+            font-size: 30px;
+
+            box-shadow:
+                0 10px 25px rgba(169,111,30,0.25);
+
+        }
+
+
+        .admin-login-card h1 {
+
+            margin: 0;
+
+            color: #3f281d;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 30px;
+
+        }
+
+
+        .admin-login-card > p {
+
+            margin: 8px 0 25px;
+
+            color: #806956;
+
+            font-size: 13px;
+
+        }
+
+
+        .admin-form-group {
+
+            text-align: left;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .admin-form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #4a3021;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+        }
+
+
+        .admin-form-group input {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 13px 14px;
+
+            border:
+
+                1px solid #d5bd9b;
+
+            border-radius: 12px;
+
+            background: #fffaf1;
+
+            color: #3f281d;
+
+            outline: none;
+
+            font-family: inherit;
+
+        }
+
+
+        .admin-form-group input:focus {
+
+            border-color: #c88f32;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(200,143,50,0.12);
+
+        }
+
+
+        #adminLoginForm button {
+
+            width: 100%;
+
+            margin-top: 8px;
+
+            padding: 14px;
+
+            border: 0;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #70452d,
+                    #4a3021
+                );
+
+            color: #fffaf1;
+
+            font-size: 13px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 22px
+                rgba(74,48,33,0.20);
+
+        }
+
+
+        #adminLoginMessage {
+
+            margin-top: 15px;
+
+            font-size: 12px;
+
+        }
+
+.remove-btn {
+    border: none;
+    background: linear-gradient(
+        135deg,
+        var(--cr-brown),
+        var(--cr-dark)
+    );
+    color: #ffffff;
+    padding: 9px 15px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 7px 16px rgba(63, 40, 29, 0.18);
+}
+
+.remove-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(63, 40, 29, 0.25);
+}
+
+.remove-btn:active {
+    transform: translateY(0);
+}
+        /* =====================================================
+           ADMIN NAVBAR
+        ===================================================== */
+
+        .admin-navbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 500;
+
+            min-height: 76px;
+
+            padding: 0 5%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            background:
+                rgba(255,250,241,0.94);
+
+            border-bottom:
+                1px solid #d9c4a3;
+
+            backdrop-filter: blur(15px);
+
+        }
+
+
+        .admin-brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .admin-brand-icon {
+
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #70452d,
+                    #4a3021
+                );
+
+            color: #fffaf1;
+
+            font-size: 20px;
+
+        }
+
+
+        .admin-brand strong {
+
+            display: block;
+
+            color: #3f281d;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 18px;
+
+        }
+
+
+        .admin-brand span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: #a96f1e;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .admin-user-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        #adminUserEmail {
+
+            color: #806956;
+
+            font-size: 11px;
+
+        }
+
+
+        #adminLogoutBtn {
+
+            padding: 9px 15px;
+
+            border:
+                1px solid #cdb48e;
+
+            border-radius: 999px;
+
+            background: #f3e2c2;
+
+            color: #70452d;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+        }
+
+
+        #adminLogoutBtn:hover {
+
+            background: #e5cfaa;
+
+        }
+
+
+        /* =====================================================
+           DASHBOARD CONTAINER
+        ===================================================== */
+
+        .admin-container {
+
+            width: min(1380px, 90%);
+
+            margin: auto;
+
+            padding: 38px 0 70px;
+
+        }
+
+
+        .admin-heading {
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .admin-heading span {
+
+            color: #a96f1e;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .admin-heading h1 {
+
+            margin: 8px 0 5px;
+
+            color: #3f281d;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(34px,4vw,48px);
+
+        }
+
+
+        .admin-heading p {
+
+            margin: 0;
+
+            color: #806956;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================================
+           STATISTICS
+        ===================================================== */
+
+        .admin-stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 17px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .admin-stat-card {
+
+            padding: 22px;
+
+            border:
+                1px solid rgba(
+                    139,99,69,0.20
+                );
+
+            border-radius: 19px;
+
+            background:
+                rgba(255,250,241,0.93);
+
+            box-shadow:
+                0 14px 35px
+                rgba(63,40,29,0.07);
+
+        }
+
+
+        .admin-stat-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+        }
+
+
+        .admin-stat-icon {
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #f3e2c2;
+
+            font-size: 20px;
+
+        }
+
+
+        .admin-stat-label {
+
+            color: #806956;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .admin-stat-card h2 {
+
+            margin: 14px 0 0;
+
+            color: #4a3021;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 29px;
+
+        }
+
+
+        /* =====================================================
+           TABS
+        ===================================================== */
+
+        .admin-tabs {
+
+            display: flex;
+
+            gap: 7px;
+
+            padding: 7px;
+
+            margin-bottom: 20px;
+
+            border:
+                1px solid #d9c4a3;
+
+            border-radius: 16px;
+
+            background:
+                rgba(255,250,241,0.75);
+
+            overflow-x: auto;
+
+        }
+
+
+        .admin-tab {
+
+            flex: 1;
+
+            min-width: 150px;
+
+            padding: 12px 17px;
+
+            border: 0;
+
+            border-radius: 11px;
+
+            background: transparent;
+
+            color: #806956;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+        }
+
+
+        .admin-tab:hover {
+
+            background: #f3e2c2;
+
+            color: #4a3021;
+
+        }
+
+
+        .admin-tab.active {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #70452d,
+                    #4a3021
+                );
+
+            color: #fffaf1;
+
+        }
+
+
+        /* =====================================================
+           COMMON PANEL
+        ===================================================== */
+
+        .admin-panel {
+
+            padding: 27px;
+
+            border:
+                1px solid rgba(
+                    139,99,69,0.20
+                );
+
+            border-radius: 22px;
+
+            background:
+                rgba(255,250,241,0.93);
+
+            box-shadow:
+                0 18px 45px
+                rgba(63,40,29,0.08);
+
+        }
+
+
+        .admin-panel-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 23px;
+
+        }
+
+
+        .admin-panel-header h2 {
+
+            margin: 0;
+
+            color: #3f281d;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 25px;
+
+        }
+
+
+        .admin-panel-header p {
+
+            margin: 5px 0 0;
+
+            color: #806956;
+
+            font-size: 12px;
+
+        }
+
+
+        .admin-primary-btn {
+
+            border: 0;
+
+            padding: 11px 17px;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #70452d,
+                    #4a3021
+                );
+
+            color: #fffaf1;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 18px
+                rgba(74,48,33,0.16);
+
+        }
+
+
+        .admin-primary-btn:hover {
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .admin-secondary-btn {
+
+            border:
+                1px solid #cdb48e;
+
+            padding: 10px 15px;
+
+            border-radius: 999px;
+
+            background: #f3e2c2;
+
+            color: #70452d;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =====================================================
+           ORDERS
+        ===================================================== */
+
+        .orders-toolbar-admin {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .order-filter {
+
+            padding: 10px 13px;
+
+            border:
+                1px solid #d5bd9b;
+
+            border-radius: 11px;
+
+            background: #fffaf1;
+
+            color: #4a3021;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            outline: none;
+
+        }
+
+
+        #ordersLoading {
+
+            padding: 45px;
+
+            text-align: center;
+
+            color: #806956;
+
+            font-size: 13px;
+
+        }
+
+
+        #noOrders {
+
+            padding: 50px 20px;
+
+            text-align: center;
+
+            border:
+                1px dashed #cdb48e;
+
+            border-radius: 17px;
+
+            background: #fffaf1;
+
+            color: #806956;
+
+        }
+
+
+        #ordersContainer {
+
+            display: grid;
+
+            gap: 13px;
+
+        }
+
+
+        .admin-order-card {
+
+            padding: 19px;
+
+            border:
+                1px solid #d9c4a3;
+
+            border-radius: 16px;
+
+            background: #fffaf1;
+
+        }
+
+
+        .admin-order-top {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+        }
+
+
+        .admin-order-id {
+
+            color: #4a3021;
+
+            font-size: 13px;
+
+            font-weight: 900;
+
+        }
+
+
+        .admin-order-date {
+
+            margin-top: 5px;
+
+            color: #8b735f;
+
+            font-size: 10px;
+
+        }
+
+
+        .admin-order-status {
+
+            padding: 6px 10px;
+
+            border-radius: 999px;
+
+            background: #f3e2c2;
+
+            color: #70452d;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .admin-order-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 14px;
+
+            margin-top: 16px;
+
+            padding-top: 16px;
+
+            border-top:
+                1px solid #eadbc6;
+
+        }
+
+
+        .admin-order-info span {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #9a806a;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .admin-order-info strong {
+
+            color: #4a3021;
+
+            font-size: 12px;
+
+        }
+
+
+        .admin-order-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 17px;
+
+        }
+
+
+        .admin-small-btn {
+
+            border:
+                1px solid #cdb48e;
+
+            padding: 8px 12px;
+
+            border-radius: 999px;
+
+            background: #f3e2c2;
+
+            color: #70452d;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+        }
+
+
+        .admin-small-btn:hover {
+
+            background: #e5cfaa;
+
+        }
+
+
+        .admin-delivery-btn {
+
+            background: #e5ead7;
+
+            border-color: #c8d1ad;
+
+            color: #59643d;
+
+        }
+
+
+        /* =====================================================
+           PRODUCTS
+        ===================================================== */
+
+        #productsContainer {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 17px;
+
+        }
+
+
+        .admin-product-card {
+
+            overflow: hidden;
+
+            border:
+                1px solid #d9c4a3;
+
+            border-radius: 17px;
+
+            background: #fffaf1;
+
+        }
+
+
+        .admin-product-image {
+
+            width: 100%;
+
+            height: 185px;
+
+            object-fit: cover;
+
+            background: #efe0c4;
+
+        }
+
+
+        .admin-product-content {
+
+            padding: 17px;
+
+        }
+
+
+        .admin-product-content h3 {
+
+            margin: 0 0 5px;
+
+            color: #4a3021;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 18px;
+
+        }
+
+
+        .admin-product-description {
+
+            min-height: 34px;
+
+            margin: 0 0 12px;
+
+            color: #806956;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .admin-product-meta {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .admin-product-price {
+
+            color: #a96f1e;
+
+            font-size: 17px;
+
+            font-weight: 900;
+
+        }
+
+
+        .admin-stock {
+
+            padding: 5px 8px;
+
+            border-radius: 999px;
+
+            background: #eef1e4;
+
+            color: #59643d;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+        }
+
+
+        .admin-stock.low {
+
+            background: #f8ead7;
+
+            color: #9a661e;
+
+        }
+
+
+        .admin-stock.out {
+
+            background: #f5e0db;
+
+            color: #8d3c2d;
+
+        }
+
+
+        .admin-product-actions {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 7px;
+
+        }
+
+
+        .admin-edit-btn,
+        .admin-delete-btn {
+
+            padding: 9px;
+
+            border-radius: 10px;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+        }
+
+
+        .admin-edit-btn {
+
+            border:
+                1px solid #cdb48e;
+
+            background: #f3e2c2;
+
+            color: #70452d;
+
+        }
+
+
+        .admin-delete-btn {
+
+            border:
+                1px solid #e1bbb1;
+
+            background: #f8e8e3;
+
+            color: #8d3c2d;
+
+        }
+
+
+        /* =====================================================
+           QR SCANNER
+        ===================================================== */
+
+        .scanner-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(300px,0.9fr)
+                minmax(300px,1.1fr);
+
+            gap: 25px;
+
+        }
+
+
+        #qr-reader {
+
+            width: 100%;
+
+            overflow: hidden;
+
+            border:
+                1px solid #d9c4a3;
+
+            border-radius: 17px;
+
+            background: #3f281d;
+
+        }
+
+
+        .scanner-controls {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 12px;
+
+        }
+
+
+        .scanner-message {
+
+            margin-top: 14px;
+
+            padding: 12px;
+
+            border-radius: 11px;
+
+            background: #f3e2c2;
+
+            color: #70452d;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+        }
+
+
+        #scanResult {
+
+            min-height: 220px;
+
+            padding: 22px;
+
+            border:
+                1px solid #d9c4a3;
+
+            border-radius: 17px;
+
+            background: #fffaf1;
+
+        }
+
+
+        .scan-empty {
+
+            height: 170px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            color: #806956;
+
+            font-size: 12px;
+
+        }
+
+
+        .scan-order-title {
+
+            margin: 0 0 15px;
+
+            color: #4a3021;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 21px;
+
+        }
+
+
+        .scan-info-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px solid #eadbc6;
+
+            font-size: 11px;
+
+        }
+
+
+        .scan-info-row span {
+
+            color: #806956;
+
+        }
+
+
+        .scan-info-row strong {
+
+            color: #4a3021;
+
+            text-align: right;
+
+        }
+
+
+        .scan-delivery-btn {
+
+            width: 100%;
+
+            margin-top: 17px;
+
+            padding: 12px;
+
+            border: 0;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78845a,
+                    #59643d
+                );
+
+            color: #fffaf1;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =====================================================
+           MODALS
+        ===================================================== */
+
+        .admin-modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(63,40,29,0.67);
+
+            backdrop-filter: blur(7px);
+
+        }
+
+
+        .admin-modal-box {
+
+            width:
+                min(650px,100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 23px;
+
+            background: #fffaf1;
+
+            border:
+                1px solid #d9c4a3;
+
+            box-shadow:
+                0 30px 80px
+                rgba(40,24,16,0.32);
+
+        }
+
+
+        .admin-modal-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 22px 25px;
+
+            border-bottom:
+                1px solid #eadbc6;
+
+        }
+
+
+        .admin-modal-header h2 {
+
+            margin: 0;
+
+            color: #3f281d;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 23px;
+
+        }
+
+
+        .admin-modal-close {
+
+            width: 34px;
+            height: 34px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: #f3e2c2;
+
+            color: #70452d;
+
+            font-size: 19px;
+
+            cursor: pointer;
+
+        }
+
+
+        .admin-modal-body {
+
+            padding: 25px;
+
+        }
+
+
+        .admin-field {
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .admin-field label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #4a3021;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+        }
+
+
+        .admin-field input,
+        .admin-field textarea,
+        .admin-field select {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 12px 13px;
+
+            border:
+                1px solid #d5bd9b;
+
+            border-radius: 11px;
+
+            background: #fffaf1;
+
+            color: #4a3021;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            outline: none;
+
+        }
+
+
+        .admin-field textarea {
+
+            min-height: 100px;
+
+            resize: vertical;
+
+        }
+
+
+        .admin-field input:focus,
+        .admin-field textarea:focus,
+        .admin-field select:focus {
+
+            border-color: #c88f32;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(200,143,50,0.10);
+
+        }
+
+
+        .image-preview-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 9px;
+
+            margin-top: 10px;
+
+        }
+
+
+        .image-preview-item {
+
+            position: relative;
+
+            aspect-ratio: 1;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
+            background: #efe0c4;
+
+        }
+
+
+        .image-preview-item img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .image-remove-btn {
+
+            position: absolute;
+
+            top: 5px;
+            right: 5px;
+
+            width: 22px;
+            height: 22px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: #8d3c2d;
+
+            color: #fff;
+
+            font-size: 11px;
+
+            cursor: pointer;
+
+        }
+
+
+        .admin-modal-footer {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            padding: 0 25px 25px;
+
+        }
+
+
+        #saveProductBtn,
+        #confirmDeliveryBtn {
+
+            border: 0;
+
+            padding: 12px 19px;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #70452d,
+                    #4a3021
+                );
+
+            color: #fffaf1;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+        }
+
+
+        #cancelProductBtn {
+
+            border:
+                1px solid #cdb48e;
+
+            padding: 12px 18px;
+
+            border-radius: 999px;
+
+            background: #f3e2c2;
+
+            color: #70452d;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+        }
+
+
+        #productFormMessage {
+
+            margin-top: 10px;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width:1050px) {
+
+            .admin-stats {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+            #productsContainer {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+            .scanner-layout {
+
+                grid-template-columns:1fr;
+
+            }
+
+        }
+
+
+        @media (max-width:700px) {
+
+            .admin-navbar {
+
+                padding: 0 4%;
+
+            }
+
+            #adminUserEmail {
+
+                display:none;
+
+            }
+
+            .admin-container {
+
+                width:92%;
+
+                padding-top:25px;
+
+            }
+
+            .admin-stats {
+
+                grid-template-columns:1fr 1fr;
+
+            }
+
+            .admin-panel {
+
+                padding:18px;
+
+                border-radius:17px;
+
+            }
+
+            .admin-panel-header {
+
+                align-items:flex-start;
+
+                flex-direction:column;
+
+            }
+
+            .admin-order-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+            #productsContainer {
+
+                grid-template-columns:1fr;
+
+            }
+
+            .orders-toolbar-admin {
+
+                align-items:flex-start;
+
+                flex-direction:column;
+
+            }
+
+        }
+
+
+        @media (max-width:480px) {
+
+            .admin-stats {
+
+                grid-template-columns:1fr;
+
+            }
+
+            .admin-order-grid {
+
+                grid-template-columns:1fr;
+
+            }
+
+            .admin-user-area {
+
+                gap:5px;
+
+            }
+
+            #adminLogoutBtn {
+
+                padding:8px 10px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     ADMIN LOGIN SCREEN
+========================================================= -->
+
+<div id="adminAuthScreen">
+
+    <div class="admin-login-card">
+
+        <div class="admin-login-icon">
+            🔐
+        </div>
+
+        <h1>
+            Admin Login
+        </h1>
+
+        <p>
+            Cravings Management Dashboard
+        </p>
+
+
+        <form id="adminLoginForm">
+
+            <div class="admin-form-group">
+
+                <label for="adminEmail">
+                    ADMIN EMAIL
+                </label>
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="Enter admin email"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+
+            <div class="admin-form-group">
+
+                <label for="adminPassword">
+                    PASSWORD
+                </label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    required>
+
+            </div>
+
+
+            <button type="submit">
+                Login to Dashboard →
+            </button>
+
+            <div id="adminLoginMessage"></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ADMIN WEBSITE
+========================================================= -->
+
+<div class="admin-page">
+
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <header class="admin-navbar">
+
+    <a href="index.html"
+       class="admin-brand"
+       style="text-decoration:none;">
+
+        <span class="admin-brand-icon">
+
+            <img
+                src="pf.jpeg"
+                alt="Cravings Logo">
+
+        </span>
+
+        <span>
+
+            <strong>
+                Cravings
+            </strong>
+
+            <span>
+                ADMIN PANEL
+            </span>
+
+        </span>
+
+    </a>
+
+
+    <div class="admin-user-area">
+
+        <span id="adminUserEmail">
+            Admin
+        </span>
+
+        <button
+            type="button"
+            id="adminLogoutBtn">
+
+            Logout
+
+        </button>
+
+    </div>
+
+
+    </header>
+
+
+    <!-- =====================================================
+         DASHBOARD
+    ===================================================== -->
+
+    <main class="admin-container">
+
+
+        <section class="admin-heading">
+
+            <span>
+                MANAGEMENT CENTER
+            </span>
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+            <p>
+                Manage products, orders, stock and delivery
+                from one place.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             STATS
+        ================================================= -->
+
+        <section class="admin-stats">
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-top">
+
+                    <div>
+                        <div class="admin-stat-label">
+                            Products
+                        </div>
+
+                        <h2 id="totalProducts">
+                            0
+                        </h2>
+                    </div>
+
+                    <div class="admin-stat-icon">
+                        🥛
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-top">
+
+                    <div>
+                        <div class="admin-stat-label">
+                            Total Orders
+                        </div>
+
+                        <h2 id="totalOrders">
+                            0
+                        </h2>
+                    </div>
+
+                    <div class="admin-stat-icon">
+                        📦
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-top">
+
+                    <div>
+                        <div class="admin-stat-label">
+                            Pending Orders
+                        </div>
+
+                        <h2 id="pendingOrders">
+                            0
+                        </h2>
+                    </div>
+
+                    <div class="admin-stat-icon">
+                        ⏳
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-top">
+
+                    <div>
+                        <div class="admin-stat-label">
+                            Today's Sales
+                        </div>
+
+                        <h2 id="todaySales">
+                            ₹0
+                        </h2>
+                    </div>
+
+                    <div class="admin-stat-icon">
+                        💰
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TABS
+        ================================================= -->
+
+        <div class="admin-tabs">
+
+            <button
+                type="button"
+                class="admin-tab active"
+                id="ordersTab">
+
+                📦 Orders
+
+            </button>
+
+
+            <button
+                type="button"
+                class="admin-tab"
+                id="productsTab">
+
+                🥛 Products
+
+            </button>
+
+
+            <button
+                type="button"
+                class="admin-tab"
+                id="scannerTab">
+
+                📷 QR Scanner
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             ORDERS PANEL
+        ================================================= -->
+
+        <section
+            id="ordersPanel"
+            class="admin-panel">
+
+            <div class="admin-panel-header">
+
+                <div>
+
+                    <h2>
+                        Customer Orders
+                    </h2>
+
+                    <p>
+                        View and manage all incoming orders.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-secondary-btn"
+                    id="refreshOrdersBtn">
+
+                    ↻ Refresh Orders
+
+                </button>
+
+            </div>
+
+
+            <div class="orders-toolbar-admin">
+
+                <select
+                    id="orderStatusFilter"
+                    class="order-filter">
+
+                    <option value="all">
+                        All Orders
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="confirmed">
+                        Confirmed
+                    </option>
+
+                    <option value="preparing">
+                        Preparing
+                    </option>
+
+                    <option value="out_for_delivery">
+                        Out for Delivery
+                    </option>
+
+                    <option value="delivered">
+                        Delivered
+                    </option>
+
+                    <option value="cancelled">
+                        Cancelled
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="ordersLoading">
+
+                Loading orders...
+
+            </div>
+
+
+            <div id="noOrders"
+                 style="display:none;">
+
+                📦
+
+                <h3>
+                    No orders found
+                </h3>
+
+                <p>
+                    Customer orders will appear here.
+                </p>
+
+            </div>
+
+
+            <div id="ordersContainer">
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PRODUCTS PANEL
+        ================================================= -->
+
+        <section
+            id="productsPanel"
+            class="admin-panel"
+            style="display:none;">
+
+            <div class="admin-panel-header">
+
+                <div>
+
+                    <h2>
+                        Product Management
+                    </h2>
+
+                    <p>
+                        Add, edit, remove products and manage stock.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-primary-btn"
+                    id="addProductBtn">
+
+                    + Add Product
+
+                </button>
+
+            </div>
+
+
+            <div id="productsLoading"
+                 style="
+                    padding:40px;
+                    text-align:center;
+                    color:#806956;
+                 ">
+<!-- =================================================
+     PRODUCT SEARCH & STOCK FILTER
+================================================= -->
+
+<div
+    class="product-tools"
+    style="
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap;
+        margin:20px 0;
+    "
+>
+
+    <input
+        type="text"
+        id="productSearchInput"
+        placeholder="🔎 Search products..."
+        style="
+            flex:1;
+            min-width:240px;
+            padding:13px 16px;
+            border:1px solid #d9b58a;
+            border-radius:12px;
+            background:#fffaf1;
+            color:#4a3021;
+            font-size:14px;
+            outline:none;
+        "
+    >
+
+
+    <select
+        id="productStockFilter"
+        style="
+            min-width:180px;
+            padding:13px 16px;
+            border:1px solid #d9b58a;
+            border-radius:12px;
+            background:#fffaf1;
+            color:#4a3021;
+            font-size:14px;
+            outline:none;
+            cursor:pointer;
+        "
+    >
+
+        <option value="all">
+            All Products
+        </option>
+
+        <option value="in-stock">
+            In Stock
+        </option>
+
+        <option value="low-stock">
+            ⚠️ Low Stock
+        </option>
+
+        <option value="out-of-stock">
+            🚫 Out of Stock
+        </option>
+
+    </select>
+
+</div>
+                Loading products...
+
+            </div>
+
+
+            <div id="noProducts"
+                 style="
+                    display:none;
+                    padding:45px;
+                    text-align:center;
+                    color:#806956;
+                 ">
+
+                🥛
+
+                <h3>
+                    No products yet
+                </h3>
+
+                <p>
+                    Add your first Cravings product.
+                </p>
+
+            </div>
+
+
+            <div id="productsContainer">
+            </div>
+
+      
+<!-- PRODUCT SEARCH + STOCK FILTER -->
+
+<div
+    style="
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap;
+        margin:20px 0;
+    "
+>
+
+    <input
+        type="text"
+        id="productSearchInput"
+        placeholder="🔎 Search products..."
+        style="
+            flex:1;
+            min-width:240px;
+            padding:13px 16px;
+            border:1px solid #d9b58a;
+            border-radius:12px;
+            background:#fffaf1;
+            color:#4a3021;
+            font-size:14px;
+            outline:none;
+        "
+    >
+
+    <select
+        id="productStockFilter"
+        style="
+            padding:13px 16px;
+            border:1px solid #d9b58a;
+            border-radius:12px;
+            background:#fffaf1;
+            color:#4a3021;
+            font-size:14px;
+            outline:none;
+        "
+    >
+
+        <option value="all">
+            All Products
+        </option>
+
+        <option value="in-stock">
+            In Stock
+        </option>
+
+        <option value="low-stock">
+            Low Stock
+        </option>
+
+        <option value="out-of-stock">
+            Out of Stock
+        </option>
+
+    </select>
+
+</div>
+  </section>
+        <!-- =================================================
+             QR SCANNER PANEL
+        ================================================= -->
+
+        <section
+            id="scannerPanel"
+            class="admin-panel"
+            style="display:none;">
+
+            <div class="admin-panel-header">
+
+                <div>
+
+                    <h2>
+                        Order QR Scanner
+                    </h2>
+
+                    <p>
+                        Scan the customer's order QR before delivery.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="scanner-layout">
+
+
+                <!-- SCANNER -->
+
+                <div>
+
+                    <div id="qr-reader"></div>
+
+
+                    <div class="scanner-controls">
+
+                        <button
+                            type="button"
+                            class="admin-primary-btn"
+                            id="startScannerBtn">
+
+                            ▶ Start Scanner
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-secondary-btn"
+                            id="stopScannerBtn">
+
+                            ■ Stop
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="scannerMessage"
+                        class="scanner-message">
+
+                        Start the scanner and scan
+                        the customer's QR code.
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESULT -->
+
+                <div id="scanResult">
+
+                    <div class="scan-empty">
+
+                        📷
+
+                        <br>
+
+                        Scan an order QR code
+                        to view order details.
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     PRODUCT MODAL
+========================================================= -->
+
+<div
+    id="productModal"
+    class="admin-modal">
+
+
+    <div class="admin-modal-box">
+
+
+        <div class="admin-modal-header">
+
+            <h2 id="productModalTitle">
+                Add Product
+            </h2>
+
+
+            <button
+                type="button"
+                class="admin-modal-close"
+                id="closeProductModal">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form id="productForm">
+
+
+            <div class="admin-modal-body">
+
+
+                <!-- HIDDEN PRODUCT ID -->
+
+                <input
+                    type="hidden"
+                    id="editProductId"
+                    name="editProductId">
+
+
+                <!-- NAME -->
+
+                <div class="admin-field">
+
+                    <label for="productName">
+                        PRODUCT NAME
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        name="productName"
+                        placeholder="Example: Premium Badam Milk"
+                        required>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="admin-field">
+
+                    <label for="productPrice">
+                        PRICE (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productPrice"
+                        name="productPrice"
+                        min="1"
+                        step="0.01"
+                        placeholder="Example: 120"
+                        required>
+
+                </div>
+
+
+                <!-- STOCK -->
+
+                <div class="admin-field">
+
+                    <label for="productStock">
+                        STOCK
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productStock"
+                        name="productStock"
+                        min="0"
+                        step="1"
+                        placeholder="Example: 50"
+                        required>
+
+                </div>
+
+
+                <!-- OUT OF STOCK -->
+
+                <div class="admin-field">
+
+                    <label for="productOutOfStock">
+                        STOCK STATUS
+                    </label>
+
+                    <label
+                        for="productOutOfStock"
+                        style="
+                            display:flex;
+                            align-items:center;
+                            gap:9px;
+                            padding:11px 13px;
+                            border:1px solid #d9c4a3;
+                            border-radius:11px;
+                            background:#fffaf1;
+                            color:#70452d;
+                            cursor:pointer;
+                            font-size:11px;
+                            font-weight:800;
+                        "
+                    >
+                        <input
+                            type="checkbox"
+                            id="productOutOfStock"
+                            name="productOutOfStock"
+                            style="width:16px;height:16px;cursor:pointer;"
+                        >
+                        <span>Mark this product as Out of Stock</span>
+                    </label>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="admin-field">
+
+                    <label for="productDescription">
+                        DESCRIPTION
+                    </label>
+
+                    <textarea
+                        id="productDescription"
+                        name="productDescription"
+                        placeholder="Describe the product..."
+                        required></textarea>
+
+                </div>
+
+
+                <!-- EXISTING IMAGES -->
+
+                <div class="admin-field">
+
+                    <label>
+                        EXISTING PRODUCT IMAGES
+                    </label>
+
+                    <div
+                        id="existingImages"
+                        class="image-preview-grid">
+                    </div>
+
+                </div>
+
+
+                <!-- NEW IMAGES -->
+
+                <div class="admin-field">
+
+                    <label for="productImages">
+                        ADD NEW IMAGES
+                    </label>
+
+                    <input
+                        type="file"
+                        id="productImages"
+                        name="productImages"
+                        accept="image/*"
+                        multiple>
+
+                    <div
+                        id="newImagePreview"
+                        class="image-preview-grid">
+                    </div>
+
+                </div>
+
+
+                <div id="productFormMessage">
+                </div>
+
+
+            </div>
+
+
+            <div class="admin-modal-footer">
+
+                <button
+                    type="button"
+                    id="cancelProductBtn">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    id="saveProductBtn">
+
+                    Save Product
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ORDER DETAILS MODAL
+========================================================= -->
+
+<div
+    id="orderModal"
+    class="admin-modal">
+
+
+    <div class="admin-modal-box">
+
+
+        <div class="admin-modal-header">
+
+            <h2>
+                Order Details
+            </h2>
+
+
+            <button
+                type="button"
+                class="admin-modal-close"
+                id="closeOrderModal">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="orderModalContent"
+            class="admin-modal-body">
+
+            Loading...
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     DELIVERY CONFIRMATION MODAL
+========================================================= -->
+
+<div
+    id="deliveryModal"
+    class="admin-modal">
+
+
+    <div class="admin-modal-box"
+         style="max-width:450px;">
+
+
+        <div class="admin-modal-header">
+
+            <h2>
+                Confirm Delivery
+            </h2>
+
+
+            <button
+                type="button"
+                class="admin-modal-close"
+                id="closeDeliveryModal">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="admin-modal-body">
+
+            <p style="
+                color:#6f5a49;
+                font-size:13px;
+                line-height:1.7;
+                margin-top:0;
+            ">
+
+                Are you sure this order has been delivered?
+
+                Once confirmed, the order QR will be
+                marked as <strong>disabled</strong> and
+                cannot be reused.
+
+            </p>
+
+
+            <div
+                id="deliveryOrderInfo"
+                style="
+                    margin-top:17px;
+                    padding:14px;
+                    border-radius:12px;
+                    background:#f3e2c2;
+                    color:#4a3021;
+                    font-size:12px;
+                ">
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-modal-footer">
+ <button
+    type="button"
+    id="cancelDeliveryModal"
+    class="admin-secondary-btn">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                id="confirmDeliveryBtn">
+
+                ✓ Confirm Delivery
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ADMIN JAVASCRIPT
+========================================================= -->
+
+<script
+    type="module"
+    src="js/admin.js">
+</script>
+
+
+</body>
+</html>

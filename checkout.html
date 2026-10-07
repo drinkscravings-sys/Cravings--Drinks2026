@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Cravings</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Razorpay Checkout -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        /* =====================================================
+           BADAM MILK — CHECKOUT PAGE
+        ===================================================== */
+
+        .checkout-page {
+            min-height: 100vh;
+            padding: 120px 6% 80px;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(200, 143, 50, 0.13),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(120, 132, 87, 0.10),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f6ead5 0%,
+                    #efe0c4 48%,
+                    #e5cfaa 100%
+                );
+        }
+
+        .checkout-header {
+            max-width: 1180px;
+            margin: 0 auto 42px;
+            text-align: center;
+        }
+
+        .checkout-eyebrow {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: #a96f1e;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .checkout-header h1 {
+            margin: 0;
+            color: #3f281d;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(38px, 5vw, 58px);
+            line-height: 1.05;
+        }
+
+        .checkout-header p {
+            max-width: 650px;
+            margin: 15px auto 0;
+            color: #6f5a49;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* =====================================================
+           MAIN LAYOUT
+        ===================================================== */
+
+        .checkout-container {
+            max-width: 1180px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1.45fr)
+                minmax(320px, 0.75fr);
+
+            gap: 28px;
+            align-items: start;
+        }
+
+        .checkout-card {
+            background: rgba(255, 250, 241, 0.93);
+            border: 1px solid rgba(139, 99, 69, 0.20);
+            border-radius: 24px;
+            box-shadow:
+                0 20px 55px rgba(63, 40, 29, 0.11);
+
+            overflow: hidden;
+        }
+
+        .checkout-card-header {
+            padding: 25px 28px;
+
+            border-bottom:
+                1px solid rgba(139, 99, 69, 0.15);
+        }
+
+        .checkout-card-header h2 {
+            margin: 0;
+            color: #3f281d;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 25px;
+        }
+
+        .checkout-card-header p {
+            margin: 7px 0 0;
+            color: #806956;
+            font-size: 13px;
+        }
+
+        .checkout-card-body {
+            padding: 28px;
+        }
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .checkout-section-title {
+            margin: 0 0 18px;
+
+            color: #70452d;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+
+            color: #4a3021;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+
+            border: 1px solid #d5bd9b;
+            border-radius: 13px;
+
+            padding: 13px 14px;
+
+            background: #fffaf1;
+            color: #3f281d;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        .form-group textarea {
+            min-height: 95px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #c88f32;
+
+            box-shadow:
+                0 0 0 3px rgba(200, 143, 50, 0.12);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #a38d77;
+        }
+
+        /* =====================================================
+           PAYMENT
+        ===================================================== */
+
+        .payment-section {
+            margin-top: 30px;
+            padding-top: 28px;
+
+            border-top:
+                1px solid rgba(139, 99, 69, 0.15);
+        }
+
+        .payment-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .payment-option {
+            position: relative;
+        }
+
+        .payment-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .payment-option label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 17px 18px;
+
+            border: 1px solid #d5bd9b;
+            border-radius: 16px;
+
+            background: #fffaf1;
+
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .payment-option label:hover {
+            border-color: #c88f32;
+            transform: translateY(-1px);
+        }
+
+        .payment-option input:checked + label {
+            border-color: #a96f1e;
+            background: #f3e2c2;
+
+            box-shadow:
+                0 8px 20px rgba(139, 99, 69, 0.10);
+        }
+
+        .payment-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 12px;
+            background: #efe0c4;
+
+            font-size: 20px;
+        }
+
+        .payment-text strong {
+            display: block;
+            margin-bottom: 4px;
+
+            color: #4a3021;
+            font-size: 14px;
+        }
+
+        .payment-text span {
+            color: #806956;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .payment-check {
+            margin-left: auto;
+
+            width: 18px;
+            height: 18px;
+
+            border: 2px solid #c6ad89;
+            border-radius: 50%;
+        }
+
+        .payment-option input:checked + label .payment-check {
+            border: 5px solid #a96f1e;
+        }
+
+        #paymentNotice {
+            margin-top: 14px;
+            padding: 13px 15px;
+
+            border-radius: 12px;
+
+            background: #eef1e4;
+            border: 1px solid #d0d8b9;
+
+            color: #59643d;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           ORDER BUTTON
+        ===================================================== */
+
+        #placeOrderButton {
+            width: 100%;
+            margin-top: 25px;
+
+            border: 0;
+            border-radius: 999px;
+
+            padding: 16px 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #70452d,
+                    #4a3021
+                );
+
+            color: #fffaf1;
+
+            font-size: 14px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 12px 25px rgba(74, 48, 33, 0.22);
+
+            transition: 0.25s ease;
+        }
+
+        #placeOrderButton:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 17px 32px rgba(74, 48, 33, 0.28);
+        }
+
+        #placeOrderButton:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #checkoutMessage {
+            margin-top: 15px;
+            padding: 12px 14px;
+
+            border-radius: 11px;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           ORDER SUMMARY
+        ===================================================== */
+
+        .checkout-summary-card {
+            position: sticky;
+            top: 100px;
+        }
+
+        #checkoutItems {
+            padding: 5px 28px 20px;
+        }
+
+        .checkout-item {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+
+            gap: 13px;
+            align-items: center;
+
+            padding: 16px 0;
+
+            border-bottom:
+                1px solid rgba(139, 99, 69, 0.13);
+        }
+
+        .checkout-item:last-child {
+            border-bottom: 0;
+        }
+
+        .checkout-item img {
+            width: 60px;
+            height: 60px;
+
+            object-fit: cover;
+
+            border-radius: 13px;
+
+            background: #efe0c4;
+        }
+
+        .checkout-item h4 {
+            margin: 0 0 5px;
+
+            color: #4a3021;
+            font-size: 13px;
+        }
+
+        .checkout-item p {
+            margin: 0;
+
+            color: #806956;
+            font-size: 11px;
+        }
+
+        .checkout-item strong {
+            color: #a96f1e;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .summary-area {
+            padding: 0 28px 28px;
+        }
+
+        .summary-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 13px;
+
+            color: #6f5a49;
+            font-size: 13px;
+        }
+
+        .summary-line strong {
+            color: #4a3021;
+        }
+
+        .summary-divider {
+            height: 1px;
+            margin: 19px 0;
+
+            background: #d9c4a3;
+        }
+
+        .checkout-total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .checkout-total span:first-child {
+            color: #3f281d;
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .checkout-total span:last-child {
+            color: #a96f1e;
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        /* =====================================================
+           SECURITY / TRUST
+        ===================================================== */
+
+        .checkout-trust {
+            margin-top: 20px;
+
+            display: grid;
+            gap: 9px;
+        }
+
+        .checkout-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 11px 13px;
+
+            border-radius: 11px;
+
+            background: #f3e2c2;
+
+            color: #6f5a49;
+            font-size: 11px;
+        }
+
+        .checkout-trust-item strong {
+            color: #59643d;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-summary-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .checkout-page {
+                padding: 105px 5% 60px;
+            }
+
+            .checkout-card {
+                border-radius: 18px;
+            }
+
+            .checkout-card-header,
+            .checkout-card-body {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            #checkoutItems {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .summary-area {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+
+
+            <div class="nav-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="index.html#products">
+                    Products
+                </a>
+
+                <a href="index.html#about">
+                    About
+                </a>
+
+                <a href="profile.html">
+                    My Profile
+                </a>
+
+            </div>
+
+            <div class="nav-actions">
+
+                <a href="profile.html"
+                   class="nav-login">
+                    Account
+                </a>
+
+                <a href="cart.html"
+                   class="cart-link">
+                    🛒
+                    <span id="cartCount">0</span>
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         CHECKOUT
+    ===================================================== -->
+
+    <main class="checkout-page">
+
+        <section class="checkout-header">
+
+            <span class="checkout-eyebrow">
+                SECURE CHECKOUT
+            </span>
+
+            <h1>Complete Your Order</h1>
+
+            <p>
+                Enter your delivery details, choose your preferred
+                payment method and place your order in Cravings.
+            </p>
+
+        </section>
+
+
+        <div class="checkout-container">
+
+            <!-- =================================================
+                 CUSTOMER DETAILS
+            ================================================= -->
+
+            <section class="checkout-card">
+
+                <div class="checkout-card-header">
+
+                    <h2>Delivery Details</h2>
+
+                    <p>
+                        Where should we deliver your order?
+                    </p>
+
+                </div>
+
+
+                <div class="checkout-card-body">
+
+                    <form id="checkoutForm">
+
+                        <h3 class="checkout-section-title">
+                            Customer Information
+                        </h3>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="customerName">
+                                    Full Name *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="customerName"
+                                    name="customerName"
+                                    placeholder="Enter your full name"
+                                    autocomplete="name"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="customerPhone">
+                                    Phone Number *
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="customerPhone"
+                                    name="customerPhone"
+                                    placeholder="Enter phone number"
+                                    autocomplete="tel"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label for="customerAddress">
+                                    Delivery Address *
+                                </label>
+
+                                <textarea
+                                    id="customerAddress"
+                                    name="customerAddress"
+                                    placeholder="House / Flat number, street, area"
+                                    autocomplete="street-address"
+                                    required></textarea>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="customerCity">
+                                    City *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="customerCity"
+                                    name="customerCity"
+                                    placeholder="Enter city"
+                                    autocomplete="address-level2"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="customerPincode">
+                                    Pincode *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="customerPincode"
+                                    name="customerPincode"
+                                    placeholder="Enter pincode"
+                                    inputmode="numeric"
+                                    autocomplete="postal-code"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label for="customerLandmark">
+                                    Landmark
+                                    <span style="font-weight:500;">
+                                        (Optional)
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="customerLandmark"
+                                    name="customerLandmark"
+                                    placeholder="Nearby landmark">
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PAYMENT -->
+
+                        <div class="payment-section">
+
+                            <h3 class="checkout-section-title">
+                                Payment Method
+                            </h3>
+
+
+                            <div class="payment-options">
+
+                                <!-- ONLINE -->
+
+                                <div class="payment-option">
+
+                                    <input
+                                        type="radio"
+                                        id="onlinePayment"
+                                        name="paymentMethod"
+                                        value="online"
+                                        checked>
+
+                                    <label for="onlinePayment">
+
+                                        <span class="payment-icon">
+                                            💳
+                                        </span>
+
+                                        <span class="payment-text">
+
+                                            <strong>
+                                                Online Payment
+                                            </strong>
+
+                                            <span>
+                                                Pay securely using
+                                                Razorpay.
+                                            </span>
+
+                                        </span>
+
+                                        <span class="payment-check"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- COD -->
+
+                                <div class="payment-option">
+
+                                    <input
+                                        type="radio"
+                                        id="codPayment"
+                                        name="paymentMethod"
+                                        value="cod">
+
+                                    <label for="codPayment">
+
+                                        <span class="payment-icon">
+                                            💵
+                                        </span>
+
+                                        <span class="payment-text">
+
+                                            <strong>
+                                                Cash on Delivery
+                                            </strong>
+
+                                            <span>
+                                                Pay when your order
+                                                is delivered.
+                                            </span>
+
+                                        </span>
+
+                                        <span class="payment-check"></span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div id="paymentNotice">
+                                🔒 Online payments are processed through
+                                Razorpay. The order is confirmed only
+                                after payment verification.
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            id="placeOrderButton">
+
+                            Place Order →
+
+                        </button>
+
+
+                        <div id="checkoutMessage"></div>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ORDER SUMMARY
+            ================================================= -->
+
+            <aside class="checkout-card checkout-summary-card">
+
+                <div class="checkout-card-header">
+
+                    <h2>Your Order</h2>
+
+                    <p>
+                        Review your selected items
+                    </p>
+
+                </div>
+
+
+                <div id="checkoutItems">
+                    <!-- checkout.js renders items -->
+                </div>
+
+
+                <div class="summary-area">
+
+                    <div class="summary-line">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="checkoutSubtotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-line">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong>
+                            Calculated
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <div class="checkout-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <span id="checkoutTotal">
+                            ₹0
+                        </span>
+
+                    </div>
+
+
+                    <div class="checkout-trust">
+
+                        <div class="checkout-trust-item">
+                            <strong>✓</strong>
+                            Freshly prepared products
+                        </div>
+
+                        <div class="checkout-trust-item">
+                            <strong>✓</strong>
+                            Secure order processing
+                        </div>
+
+                        <div class="checkout-trust-item">
+                            <strong>✓</strong>
+                            Unique order QR verification
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script type="module"
+            src="js/checkout.js"></script>
+
+
+    <script>
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+
+        /*
+         * Cart count
+         */
+        document.addEventListener("DOMContentLoaded", () => {
+
+            try {
+
+                const cart =
+                    JSON.parse(
+                        localStorage.getItem("badamMilkCart")
+                    ) || [];
+
+                const count =
+                    cart.reduce(
+                        (total, item) =>
+                            total + Number(item.quantity || 0),
+                        0
+                    );
+
+                const cartCount =
+                    document.getElementById("cartCount");
+
+                if (cartCount) {
+                    cartCount.textContent = count;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Cart count error:",
+                    error
+                );
+
+            }
+
+        });
+    </script>
+
+</body>
+</html>
